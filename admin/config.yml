@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: username/beerotschool-site   # например: username/beerotschool
+  repo: kerenk77/beerotschool-site   # например: username/beerotschool
   branch: main                     # ветка, в которой хранятся файлы сайта
   auth_type: oauth
   client_id: Ov23lieBEaUntFb7SvCq
