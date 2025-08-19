@@ -1,0 +1,9 @@
+[build]
+  command = ""
+  publish = "."
+
+# Делает так, чтобы JSON и YAML отдавались корректно
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"

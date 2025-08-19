@@ -1,0 +1,14 @@
+{
+  "rooms": [
+    {
+      "title": "Класс 1",
+      "url": "https://zoom.us/j/00000000000",
+      "password": ""
+    },
+    {
+      "title": "Класс 2",
+      "url": "https://zoom.us/j/11111111111",
+      "password": ""
+    }
+  ]
+}
