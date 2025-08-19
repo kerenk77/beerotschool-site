@@ -1,0 +1,21 @@
+backend:
+  name: github
+  repo: username/beerotschool-site   # например: username/beerotschool
+  branch: main                     # ветка, в которой хранятся файлы сайта
+  auth_type: oauth
+  client_id: ВАШ_CLIENT_ID
+  # client_secret: ВАШ_CLIENT_SECRET  # Обычно не нужен, если используем OAuth через браузер
+  # enable_device_flow: false        # оставляем false
+
+media_folder: "assets/uploads"     # папка для загружаемых файлов на сайте
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "pages"
+    label: "Страницы"
+    folder: ""                      # корень сайта
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Название страницы", name: "title", widget: "string"}
+      - {label: "Контент", name: "body", widget: "markdown"}
