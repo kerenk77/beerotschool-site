@@ -3,7 +3,7 @@ backend:
   repo: username/beerotschool-site   # например: username/beerotschool
   branch: main                     # ветка, в которой хранятся файлы сайта
   auth_type: oauth
-  client_id: ВАШ_CLIENT_ID
+  client_id: Ov23lieBEaUntFb7SvCq
   # client_secret: ВАШ_CLIENT_SECRET  # Обычно не нужен, если используем OAuth через браузер
   # enable_device_flow: false        # оставляем false
 
