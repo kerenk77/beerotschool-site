@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Контакты — Онлайн школа "Беерот Ицхак"</title>
-  <link rel="stylesheet" href="style.css"> <!-- общий CSS -->
+  <link rel="stylesheet" href="style.css"> <!-- общий стиль сайта -->
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -13,22 +13,24 @@
       min-height: 100vh;
       padding: 2rem;
     }
-
     .container {
-      max-width: 500px;
+      max-width: 600px;
       margin: 2rem auto;
       background: rgba(255,255,255,0.95);
       border-radius: 20px;
       padding: 2rem;
       box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      text-align: center;
     }
-
-    h1 { margin-bottom: 1rem; color: #4a5568; }
-    p { margin-bottom: 2rem; color: #666; }
-
+    h1 { text-align: center; margin-bottom: 1rem; color: #4a5568; }
+    p { text-align: center; margin-bottom: 1.5rem; color: #666; }
     form { display: flex; flex-direction: column; gap: 1rem; }
-    input, textarea { padding: 0.8rem; border-radius: 10px; border: 1px solid #ccc; font-size: 1rem; }
+    input, textarea {
+      padding: 0.8rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      width: 100%;
+    }
     button {
       padding: 1rem;
       border-radius: 50px;
@@ -40,9 +42,9 @@
       transition: all 0.3s ease;
     }
     button:hover { transform: translateY(-3px); }
-
-    .contacts { margin-top: 2rem; font-size: 1rem; }
-    .contacts a { color: #4a5568; text-decoration: none; display: block; margin: 0.3rem 0; }
+    .contacts { text-align: center; margin-top: 2rem; }
+    .contacts a { display: block; margin: 0.5rem 0; color: #333; text-decoration: none; }
+    .contacts a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
@@ -51,20 +53,20 @@
 
   <main class="container">
     <h1>Контакты</h1>
-    <p>Оставьте свои контакты, и мы свяжемся с вами!</p>
+    <p>Оставьте свои контакты, и мы свяжемся с вами</p>
 
-    <form action="mailto:k025804524@gmail.com" method="POST" enctype="text/plain">
+    <!-- Форма отправки через Formspree -->
+    <form action="https://formspree.io/f/yourFormID" method="POST">
       <input type="text" name="name" placeholder="Ваше имя" required>
+      <input type="email" name="_replyto" placeholder="Ваш Email" required>
       <input type="tel" name="phone" placeholder="Телефон или WhatsApp" required>
-      <input type="email" name="email" placeholder="Email" required>
-      <textarea name="message" placeholder="Ваше сообщение" rows="4"></textarea>
+      <textarea name="message" placeholder="Сообщение" rows="4"></textarea>
       <button type="submit">Отправить</button>
     </form>
 
     <div class="contacts">
-      <p>Или свяжитесь с нами напрямую:</p>
       <a href="mailto:k025804524@gmail.com">Email: k025804524@gmail.com</a>
-      <a href="https://wa.me/97225804524" target="_blank">WhatsApp: +972-25-804-524</a>
+      <a href="https://wa.me/025804524" target="_blank">WhatsApp: +025804524</a>
     </div>
   </main>
 </body>
