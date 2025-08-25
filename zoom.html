@@ -30,12 +30,11 @@
 
   .zoom-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
   }
 
   .zoom-card {
-    background: #fff;
     border-radius: 20px;
     padding: 1.5rem 1rem;
     box-shadow: 0 6px 20px rgba(0,0,0,0.1);
@@ -43,41 +42,49 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: #fff;
+    min-height: 180px;
+    justify-content: space-between;
   }
 
   .zoom-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
   }
 
   .zoom-card img {
     width: 50px;
     margin-bottom: 1rem;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-  }
-
-  .zoom-card h3 {
-    margin: 0.5rem 0 1rem;
-    color: #333;
-    font-size: 1.1rem;
   }
 
   .zoom-card a {
     text-decoration: none;
     color: #fff;
-    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-    padding: 0.7rem 1.2rem;
+    background: rgba(0,0,0,0.2);
+    padding: 0.6rem 1rem;
     border-radius: 50px;
     font-weight: bold;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease;
   }
 
   .zoom-card a:hover {
-    background: linear-gradient(45deg, #ee5a24, #ff6b6b);
+    background: rgba(0,0,0,0.4);
   }
 
+  /* Разные цвета для каждой карточки */
+  .zoom-card:nth-child(1) { background: #ff7f50; }
+  .zoom-card:nth-child(2) { background: #6a5acd; }
+  .zoom-card:nth-child(3) { background: #20b2aa; }
+  .zoom-card:nth-child(4) { background: #ff6347; }
+  .zoom-card:nth-child(5) { background: #ffa500; }
+  .zoom-card:nth-child(6) { background: #3cb371; }
+  .zoom-card:nth-child(7) { background: #1e90ff; }
+  .zoom-card:nth-child(8) { background: #ff69b4; }
+  .zoom-card:nth-child(9) { background: #8a2be2; }
+  .zoom-card:nth-child(10){ background: #00ced1; }
+
   @media (max-width: 500px) {
-    .zoom-card a { padding: 0.5rem 1rem; font-size: 0.9rem; }
+    .zoom-card a { padding: 0.5rem; font-size: 0.9rem; }
   }
 </style>
 </head>
