@@ -1,4 +1,3 @@
-// menu.js
 document.addEventListener('DOMContentLoaded', () => {
   const header = document.getElementById('siteHeader');
   header.innerHTML = `
