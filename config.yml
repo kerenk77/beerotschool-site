@@ -1,42 +1,46 @@
 backend:
-  name: git-gateway
-  branch: main
+  name: github
+  repo: ВАШ_GITHUB_ЛОГИН/ВАШ_РЕПОЗИТОРИЙ   # ← сюда подставьте своё
+  branch: main                            # если у вас master, то замените на master
 
-media_folder: "assets/uploads"
-public_folder: "/assets/uploads"
+media_folder: "images/uploads"            # картинки будут загружаться сюда в репозитории
+public_folder: "/images/uploads"          # и отдаваться на сайте
 
 collections:
-  - name: "pages"
-    label: "Страницы"
+  - name: "school"
+    label: "О школе"
     files:
-      - label: "О школе"
-        name: "school"
-        file: "data/school.json"
+      - file: "content/school.json"
+        label: "Страница школы"
+        name: "schoolPage"
         fields:
           - { label: "Заголовок", name: "title", widget: "string" }
-          - { label: "Текст", name: "body", widget: "markdown" }
+          - { label: "Описание", name: "body", widget: "text" }
 
-      - label: "Расписание"
-        name: "schedule"
-        file: "data/schedule.json"
+  - name: "enroll"
+    label: "Запись"
+    files:
+      - file: "content/enroll.json"
+        label: "Форма записи"
+        name: "enrollPage"
         fields:
-          - { label: "Ссылка на Google Docs (embed/publish URL)", name: "gdocs_url", widget: "string", hint: "Вставьте ссылку на документ Google с включённым доступом по ссылке" }
+          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Инструкция", name: "instructions", widget: "text" }
 
-      - label: "Zoom-комнаты"
-        name: "zoom"
-        file: "data/zoom.json"
+  - name: "schedule"
+    label: "Расписание"
+    files:
+      - file: "content/schedule.json"
+        label: "Файл с расписанием"
+        name: "schedulePage"
         fields:
-          - label: "Комнаты"
-            name: "rooms"
-            widget: "list"
-            fields:
-              - { label: "Название", name: "title", widget: "string" }
-              - { label: "Ссылка (URL)", name: "url", widget: "string" }
-              - { label: "Пароль (необязательно)", name: "password", widget: "string", required: false }
+          - { label: "Ссылка на Google Docs", name: "url", widget: "string" }
 
-      - label: "Страница записи (тексты)"
-        name: "enroll"
-        file: "data/contact.json"
+  - name: "zoom"
+    label: "Zoom-ссылки"
+    files:
+      - file: "content/zoom.json"
+        label: "Ссылки для входа"
+        name: "zoomPage"
         fields:
-          - { label: "Заголовок", name: "heading", widget: "string", default: "Запись" }
-          - { label: "Описание", name: "description", widget: "markdown", default: "Заполните форму, и мы свяжемся с вами." }
+          - { label: "Ссылки", name: "links", widget: "list", fields: [{ label: "Название", name: "name", widget: "string" }, { label: "URL", name: "url", widget: "string" }] }
