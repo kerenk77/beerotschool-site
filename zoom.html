@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Классы Zoom — Онлайн школа "Беерот Ицхак"</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    text-align: center;
+    background: rgba(255,255,255,0.95);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  }
+
+  h1 {
+    color: #4a5568;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: #666;
+    margin-bottom: 2rem;
+  }
+
+  .zoom-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+
+  .zoom-card {
+    background: #fff;
+    border-radius: 15px;
+    padding: 1.5rem 1rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .zoom-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  }
+
+  .zoom-card img {
+    width: 50px;
+    margin-bottom: 1rem;
+  }
+
+  .zoom-card a {
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+    padding: 0.6rem 1rem;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+  }
+
+  .zoom-card a:hover {
+    background: linear-gradient(45deg, #ee5a24, #ff6b6b);
+  }
+
+  @media (max-width: 500px) {
+    .zoom-card a {
+      padding: 0.5rem;
+      font-size: 0.9rem;
+    }
+  }
+</style>
+</head>
+<body>
+<header id="siteHeader"></header>
+<script src="menu.js"></script>
+
+<main class="container">
+  <h1>Классы Zoom</h1>
+  <p>Выберите свой класс, чтобы войти в онлайн-занятие:</p>
+
+  <div class="zoom-grid">
+    <div class="zoom-card">
+      <img src="zoom-icon.png" alt="Zoom">
+      <h3>Класс 1</h3>
+      <a href="https://zoom.us/j/1234567890" target="_blank">Войти</a>
+    </div>
+    <div class="zoom-card">
+      <img src="zoom-icon.png" alt="Zoom">
+      <h3>Класс 2</h3>
+      <a href="https://zoom.us/j/2345678901" target="_blank">Войти</a>
+    </div>
+    <div class="zoom-card">
+      <img src="zoom-icon.png" alt="Zoom">
+      <h3>Класс 3</h3>
+      <a href="https://zoom.us/j/3456789012" target="_blank">Войти</a>
+    </div>
+    <div class="zoom-card">
+      <img src="zoom-icon.png" alt="Zoom">
+      <h3>Класс 4</h3>
+      <a href="https://zoom.us/j/4567890123" target="_blank">Войти</a>
+    </div>
+    <div class="zoom-card">
+      <img src="zoom-icon.png" alt="Zoom">
+      <h3>Класс 5</h3>
+      <a href="https://zoom.us/j/5678901234" target="_blank">Войти</a>
+    </div>
+    <!-- Добавьте остальные классы по аналогии -->
+  </div>
+</main>
+</body>
+</html>
