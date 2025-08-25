@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <li><a href="enroll.html">Запись</a></li>
         <li><a href="schedule.html">Расписание</a></li>
         <li><a href="contact.html">Контакты</a></li>
-        <li><a href="#about">О школе</a></li>
+        <li><a href="index.html">О школе</a></li>
       </ul>
     </nav>
   `;
