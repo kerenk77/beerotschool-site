@@ -59,45 +59,76 @@ button:hover { transform: translateY(-3px); }
   <p>Заполните форму, и мы свяжемся с вами.</p>
 
   <form id="contactForm">
-    <input type="text" name="name" placeholder="Ваше имя" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="tel" name="phone" placeholder="Телефон" required>
-    <select name="grade" required>
-      <option value="">Выберите класс</option>
-      <option value="4-6">4-6</option>
-      <option value="7-9">7-9</option>
-      <option value="10-12">10-12</option>
-    </select>
-    <textarea name="message" placeholder="Ваши вопросы" rows="4"></textarea>
-    <button type="submit">Отправить</button>
-  </form>
+  <input type="text" name="firstName" placeholder="Имя ученика" required>
+  <input type="text" name="lastName" placeholder="Фамилия ученика" required>
+  <input type="tel" name="phone" placeholder="Телефон или WhatsApp" required>
+  <input type="number" name="age" placeholder="Возраст ребенка" required>
 
-  <p id="responseMessage" style="text-align:center; margin-top:1rem; color:green;"></p>
-</main>
+  <select name="gender" required>
+    <option value="">Пол ребенка</option>
+    <option value="м">Мальчик</option>
+    <option value="д">Девочка</option>
+  </select>
+
+  <select name="jewish" required>
+    <option value="">Принадлежность к еврейству</option>
+    <option value="еврей">Еврей</option>
+    <option value="не еврей">Не еврей</option>
+    <option value="гию́р">Прохожу гиюр</option>
+  </select>
+
+  <input type="text" name="city" placeholder="Место жительства">
+  <input type="text" name="school" placeholder="Учебное заведение">
+
+  <label>Знание иврита:</label>
+  <label><input type="checkbox" name="hebrew" value="алфавит"> Знает алфавит</label>
+  <label><input type="checkbox" name="hebrew" value="нет алфавита"> Не знает алфавит</label>
+  <label><input type="checkbox" name="hebrew" value="читает"> Умеет читать</label>
+  <label><input type="checkbox" name="hebrew" value="100 слов"> Знает до 100 слов</label>
+  <label><input type="checkbox" name="hebrew" value="свободно"> Свободно говорит</label>
+
+  <input type="text" name="recommend" placeholder="Рекомендующий">
+  <input type="text" name="discount" placeholder="Нужна ли скида на обучение?">
+
+  <button type="submit">Отправить</button>
+</form>
+
+<p id="responseMessage"></p>
 
 <script>
 const form = document.getElementById('contactForm');
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const formData = new FormData(form);
+
+  // собираем checkbox-и в массив
+  const hebrewLevels = formData.getAll('hebrew');
+  formData.delete('hebrew');
+  formData.append('hebrew', hebrewLevels.join(', '));
+
   const json = Object.fromEntries(formData.entries());
+
   try {
-    const response = await fetch('/submit_contact', {
+    const response = await fetch("ВСТАВЬ_СЮДА_ССЫЛКУ_ОТ_GOOGLE_SCRIPT", {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(json)
     });
     if(response.ok){
       document.getElementById('responseMessage').textContent = "Форма успешно отправлена!";
       form.reset();
     } else {
-      document.getElementById('responseMessage').textContent = "Ошибка отправки. Попробуйте снова.";
+      document.getElementById('responseMessage').textContent = "Ошибка при отправке.";
     }
   } catch (err) {
-    document.getElementById('responseMessage').textContent = "Ошибка сервера. Попробуйте позже.";
+    document.getElementById('responseMessage').textContent = "Сбой сервера.";
   }
 });
 </script>
+
+
+  <p id="responseMessage" style="text-align:center; margin-top:1rem; color:green;"></p>
+</main>
+
 
 </body>
 </html>
