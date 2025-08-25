@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <ul class="nav-links">
         <li><a href="enroll.html">Запись</a></li>
         <li><a href="schedule.html">Расписание</a></li>
+        <li><a href="zoom.html">Классы ZOOM</a></li>
         <li><a href="contact.html">Контакты</a></li>
         <li><a href="index.html">О школе</a></li>
       </ul>
