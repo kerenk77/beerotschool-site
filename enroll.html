@@ -109,7 +109,7 @@ form.addEventListener('submit', async (e) => {
   const json = Object.fromEntries(formData.entries());
 
   try {
-    const response = await fetch("ВСТАВЬ_СЮДА_ССЫЛКУ_ОТ_GOOGLE_SCRIPT", {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbxPxNJbzycc7W46cLHKF8RV6hSC5gOk82j41GDM049S29paj6C5E6A8spZkPqeKgNgPuA/exec", {
       method: 'POST',
       body: JSON.stringify(json)
     });
