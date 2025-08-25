@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Расписание — Онлайн школа "Беерот Ицхак"</title>
-  <link rel="stylesheet" href="style.css"> <!-- общий CSS -->
+  <link rel="stylesheet" href="style.css">
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -18,10 +18,11 @@
     .container {
       max-width: 1200px;
       margin: 2rem auto;
-      padding: 1rem 2rem;
+      padding: 2rem;
       background: rgba(255,255,255,0.95);
       border-radius: 20px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      text-align: center; /* 🔹 чтобы всё содержимое было по центру */
     }
 
     h1 {
@@ -30,24 +31,22 @@
       margin-bottom: 2rem;
     }
 
-    /* Центрирование и размер фрейма */
     .schedule-container {
       display: flex;
-      justify-content: center;
-      align-items: center;
+      justify-content: center; /* 🔹 центрируем по горизонтали */
       margin: 0 auto;
       width: 100%;
     }
 
     .schedule-container iframe {
       width: 90%;
-      height: 900px; /* 🔹 сделано длинным, легко видно всё расписание */
+      max-width: 1000px;  /* 🔹 ограничение ширины */
+      height: 900px;      /* 🔹 высокая рамка для удобства */
       border: 0;
       border-radius: 15px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.1);
     }
 
-    /* Меню */
     header {
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
@@ -61,13 +60,9 @@
       padding: 0.5rem 1rem;
     }
 
-    .logo img {
-      height: 50px;
-    }
+    .logo img { height: 50px; }
 
-    nav {
-      position: relative;
-    }
+    nav { position: relative; }
 
     .nav-links {
       display: flex;
@@ -121,9 +116,8 @@
 
       .hamburger { display: flex; }
 
-      /* Мобильный фрейм чуть ниже */
       .schedule-container iframe {
-        height: 600px;
+        height: 600px; /* 🔹 чуть меньше для мобильных */
       }
     }
   </style>
