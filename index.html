@@ -5,54 +5,152 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Онлайн школа "Беерот Ицхак"</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; color: #333; }
-    header { background: #f4f4f4; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; }
-    header img { height: 60px; }
-    nav ul { list-style: none; display: flex; gap: 15px; margin: 0; padding: 0; }
-    nav ul li a { text-decoration: none; color: #333; font-weight: bold; }
-    .hero { background: url('фото для сайта1.jpg') center/cover no-repeat; color: white; text-align: center; padding: 80px 20px; }
-    .hero h1 { font-size: 2.5rem; margin-bottom: 20px; }
-    .container { max-width: 1100px; margin: auto; padding: 20px; }
-    .features, .info-section, .subjects, .stats-section { padding: 40px 20px; text-align: center; }
-    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-    .feature-card { background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.3s; }
-    .feature-card:hover { transform: translateY(-5px); }
-    .feature-icon { font-size: 2rem; margin-bottom: 10px; }
-    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-    .info-item { background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    .subjects-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-    .subject-tag { background: #4caf50; color: white; padding: 10px 15px; border-radius: 20px; font-size: 0.9rem; }
-    .stats-container { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 20px; }
-    .stat-item { text-align: center; }
-    .stat-number { font-size: 2rem; font-weight: bold; color: #4caf50; }
-    footer { background: #333; color: white; text-align: center; padding: 20px; margin-top: 40px; }
-    .mobile-menu { display: none; }
-    @media(max-width:768px){
-      nav ul { display: none; flex-direction: column; background: #f4f4f4; position: absolute; top: 70px; right: 20px; padding: 10px; border-radius: 5px; }
-      .mobile-menu { display: block; cursor: pointer; font-size: 1.5rem; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      position: sticky; top: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.5rem 1rem;
+    }
+    .logo img { height: 60px; display:block; }
+
+    .nav-links { display: flex; list-style: none; gap: 2rem; }
+    .nav-links a {
+      text-decoration: none; color: #4a5568; font-weight: 500;
+      transition: all 0.3s ease; padding: 0.5rem 1rem; border-radius: 8px;
+    }
+    .nav-links a:hover { background: #667eea; color: white; transform: translateY(-2px); }
+
+    .hero {
+      text-align: center; padding: 4rem 0;
+      background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
+      margin: 2rem 0; border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+    .hero h1 {
+      font-size: 3.5rem; color: white; margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    .hero .subtitle {
+      font-size: 1.3rem; color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 2rem; max-width: 600px; margin: auto;
+    }
+    .cta-button {
+      display: inline-block; background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+      color: white; padding: 1rem 2rem; border-radius: 50px; font-weight: bold; font-size: 1.1rem;
+      text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(238, 90, 36, 0.4);
+    }
+    .cta-button:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(238, 90, 36, 0.6); }
+
+    .photo-section { text-align: center; margin: 2rem 0; }
+    .photo-section img { max-width: 100%; border-radius: 20px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); }
+
+    .video-section { text-align: center; margin: 3rem 0; }
+    .video-section iframe { width: 100%; max-width: 800px; height: 450px; border-radius: 15px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+
+    .donate-banner {
+      text-align: center; background: linear-gradient(45deg, #f39c12, #e67e22);
+      padding: 2rem; border-radius: 20px; margin: 3rem 0; color: white; font-size: 1.5rem; font-weight: bold;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+    .donate-banner a {
+      display: inline-block; margin-top: 1rem; padding: 1rem 2rem; background: white; color: #e67e22;
+      border-radius: 50px; text-decoration: none; font-weight: bold; transition: all 0.3s ease;
+    }
+    .donate-banner a:hover { background: #f1c40f; color: white; }
+
+    /* ===== Стили для секций с преимуществами/предметами/статистикой ===== */
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; padding: 4rem 0; }
+    .feature-card { background: rgba(255,255,255,0.95); padding: 2rem; border-radius: 15px; text-align: center; transition: all .3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    .feature-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
+    .feature-icon { font-size: 3rem; margin-bottom: 1rem; color: #667eea; }
+    .feature-card h3 { color: #4a5568; margin-bottom: 1rem; font-size: 1.3rem; }
+    .feature-card p { color: #666; line-height: 1.6; }
+
+    .info-section { background: rgba(255,255,255,0.95); padding: 3rem; border-radius: 20px; margin: 2rem 0; box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+    .info-section h2 { color: #4a5568; margin-bottom: 1.5rem; font-size: 2rem; text-align: center; }
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
+    .info-item { padding: 1.5rem; background: #f7fafc; border-radius: 10px; border-left: 4px solid #667eea; }
+    .info-item h3 { color: #4a5568; margin-bottom: 0.5rem; }
+
+    .subjects { background: rgba(255,255,255,0.95); padding: 3rem; border-radius: 20px; margin: 2rem 0; text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+    .subjects h2 { color: #4a5568; margin-bottom: 2rem; font-size: 2rem; }
+    .subjects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .subject-tag { background: linear-gradient(45deg, #667eea, #764ba2); color: white; padding: 0.8rem 1rem; border-radius: 25px; font-weight: 500; transition: all 0.3s ease; }
+    .subject-tag:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(102,126,234,0.4); }
+
+    .stats-section { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 4rem 3rem; border-radius: 20px; margin: 2rem 0; text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,0.1); color: white; }
+    .stats-section h2 { color: white; margin-bottom: 3rem; font-size: 2.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+    .stats-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 3rem; }
+    .stat-item { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 2rem; border-radius: 15px; transition: all .3s ease; border: 1px solid rgba(255,255,255,0.2); }
+    .stat-item:hover { transform: translateY(-5px); background: rgba(255,255,255,0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+    .stat-number { font-size: 3rem; font-weight: bold; margin-bottom: .5rem; background: linear-gradient(45deg, #fff, #f1c40f); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .stat-label { font-size: 1rem; opacity: .9; font-weight: 500; }
+    .achievement { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 2rem; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); max-width: 600px; margin: 0 auto; }
+
+    footer { background: rgba(0, 0, 0, 0.8); color: white; text-align: center; padding: 2rem 0; margin-top: 3rem; }
+
+    @media (max-width: 768px) {
+      .nav-links { gap: 1rem; }
+      .hero h1 { font-size: 2.5rem; }
+      .hero .subtitle { font-size: 1.1rem; padding: 0 1rem; }
+      .subjects-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+      .stats-container { grid-template-columns: 1fr; }
+      .stat-number { font-size: 2.5rem; }
+      .stats-section { padding: 3rem 2rem; }
+      .stats-section h2 { font-size: 2rem; }
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="logo.jpg" alt="Логотип школы">
-    <div class="mobile-menu">☰</div>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="#about">О школе</a></li>
-        <li><a href="#subjects">Предметы</a></li>
-        <li><a href="#stats">Успехи</a></li>
-        <li><a href="#contact">Контакты</a></li>
-      </ul>
-    </nav>
+    <a href="#" class="logo"><img src="logo.jpg" alt="Логотип"></a>
+    <ul class="nav-links">
+      <li><a href="enroll.html">Запись</a></li>
+      <li><a href="schedule.html">Расписание</a></li>
+      <li><a href="contact.html">Контакты</a></li>
+      <li><a href="#about">О школе</a></li>
+    </ul>
   </header>
 
-  <section class="hero">
-    <h1>Добро пожаловать в онлайн школу "Беерот Ицхак"</h1>
-    <p>Качественное еврейское образование для детей по всему миру</p>
-  </section>
-
   <main class="container">
+    <section class="hero">
+      <h1>Онлайн школа "Беерот Ицхак"</h1>
+      <p class="subtitle">Качественное еврейское образование для детей от 4 до 16 лет со всего мира. Обучение на русском языке с опытными преподавателями.</p>
+      <a href="enroll.html" class="cta-button">Записаться на обучение</a>
+    </section>
+
+    <!-- Фото детей -->
+    <section class="photo-section">
+      <img src="фото для сайта1.jpg" alt="Ученики онлайн школы">
+    </section>
+
+    <!-- Ролик с YouTube -->
+    <section class="video-section">
+      <h2>Смотрите нашу презентацию</h2>
+      <iframe src="https://www.youtube.com/embed/TaORyaX4zaU" title="Презентация школы" frameborder="0" allowfullscreen></iframe>
+    </section>
+
+    <!-- Баннер оплата школы -->
+    <section class="donate-banner">
+      Поддержите обучение в нашей школе
+      <br>
+      <a href="https://www.beerot.ru/%d1%86%d0%b4%d0%b0%d0%ba%d0%b0-%d0%bf%d0%be%d0%b6%d0%b5%d1%80%d1%82%d0%b2%d0%be%d0%b2%d0%b0%d1%82%d1%8c-%d0%b1%d0%b5%d0%b5%d1%80%d0%be%d1%82-%d0%b8%d1%86%d1%85%d0%b0%d0%ba" target="_blank" rel="noopener">Оплатить обучение</a>
+    </section>
+
+    <!-- ===== ВСТАВЛЕНО: Особенности, Преимущества, Дисциплины, Статистика ===== -->
     <section class="features">
       <div class="feature-card">
         <div class="feature-icon">🎓</div>
@@ -93,7 +191,7 @@
       </div>
     </section>
 
-    <section class="subjects" id="subjects">
+    <section class="subjects">
       <h2>Изучаемые дисциплины</h2>
       <div class="subjects-grid">
         <div class="subject-tag">Алеф-бет</div>
@@ -114,7 +212,7 @@
       </div>
     </section>
 
-    <section class="stats-section" id="stats">
+    <section class="stats-section">
       <h2>15 лет успешной работы</h2>
       <div class="stats-container">
         <div class="stat-item">
@@ -134,6 +232,8 @@
         <p>Наши выпускники продолжили обучение в лучших учебных еврейских заведениях Израиля</p>
       </div>
     </section>
+    <!-- ===== Конец вставленных секций ===== -->
+
   </main>
 
   <footer>
@@ -154,6 +254,7 @@
       });
     }, observerOptions);
 
+    // Наблюдение за элементами для анимации
     document.querySelectorAll('.feature-card, .info-item, .stat-item').forEach(el => {
       el.style.opacity = '0';
       el.style.transform = 'translateY(30px)';
@@ -161,17 +262,13 @@
       observer.observe(el);
     });
 
-    // Мобильное меню
-    document.querySelector('.mobile-menu').addEventListener('click', function() {
-      const navLinks = document.querySelector('.nav-links');
-      navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-    });
-
-    // Плавная прокрутка
+    // Плавная прокрутка для якорных ссылок
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (!href || href === '#') return; // не мешаем ссылкам без якоря
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const target = document.querySelector(href);
         if (target) {
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
