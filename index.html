@@ -1,17 +1,537 @@
-<!DOCTYPE html>
+<section class="hero">
+      <h1>Онлайн школа "Беерот Ицхак"</h1>
+      <p class="subtitle">Качественное еврейское образование для детей от 4 до 16 лет со всего мира. Обучение на русском языке с опытными преподавателями.</p>
+      <a href="enroll.html" class="cta-button">Записаться на обучение</a>
+    </section>
+
+    <section class="photo-section">
+      <div class="photo-container">
+        <img src="data:image/jpeg;base64,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<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Beerot School</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Онлайн школа "Беерот Ицхак"</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #4a5568;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #4a5568;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+    }
+
+    .nav-links a:hover {
+      background: #667eea;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 4rem 0;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      margin: 2rem 0;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      color: white;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero .subtitle {
+      font-size: 1.3rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+      color: white;
+      padding: 1rem 2rem;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(238, 90, 36, 0.4);
+      animation: fadeInUp 1s ease-out 0.4s both;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(238, 90, 36, 0.6);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 4rem 0;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 2rem;
+      border-radius: 15px;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #667eea;
+    }
+
+    .feature-card h3 {
+      color: #4a5568;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
+    .feature-card p {
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .info-section {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 3rem;
+      border-radius: 20px;
+      margin: 2rem 0;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .info-section h2 {
+      color: #4a5568;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .info-item {
+      padding: 1.5rem;
+      background: #f7fafc;
+      border-radius: 10px;
+      border-left: 4px solid #667eea;
+    }
+
+    .info-item h3 {
+      color: #4a5568;
+      margin-bottom: 0.5rem;
+    }
+
+    .subjects {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 3rem;
+      border-radius: 20px;
+      margin: 2rem 0;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .subjects h2 {
+      color: #4a5568;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .stats-section {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 4rem 3rem;
+      border-radius: 20px;
+      margin: 2rem 0;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      color: white;
+    }
+
+    .stats-section h2 {
+      color: white;
+      margin-bottom: 3rem;
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .stat-item {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .stat-item:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(45deg, #fff, #f1c40f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      opacity: 0.9;
+      font-weight: 500;
+    }
+
+    .achievement {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .achievement p {
+      font-size: 1.2rem;
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    .subject-tag {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      padding: 0.8rem 1rem;
+      border-radius: 25px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .subject-tag:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    footer {
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      text-align: center;
+      padding: 2rem 0;
+      margin-top: 3rem;
+    }
+
+    .mobile-menu {
+      display: none;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-menu {
+        display: block;
+        background: none;
+        border: none;
+        color: #4a5568;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero .subtitle {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+      }
+      
+      .features {
+        grid-template-columns: 1fr;
+      }
+      
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .subjects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      }
+      
+      .stats-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .stat-number {
+        font-size: 2.5rem;
+      }
+      
+      .stats-section {
+        padding: 3rem 2rem;
+      }
+      
+      .stats-section h2 {
+        font-size: 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Добро пожаловать в Beerot School</h1>
-  <nav>
-    <a href="enroll.html">Запись</a> |
-    <a href="schedule.html">Расписание</a> |
-    <a href="contact.html">Контакты</a>
-  </nav>
-  <p>Это главная страница сайта. Здесь можно разместить новости или приветственное сообщение.</p>
+  <header>
+    <nav class="container">
+      <a href="#" class="logo">Беерот Ицхак</a>
+      <ul class="nav-links">
+        <li><a href="enroll.html">Запись</a></li>
+        <li><a href="schedule.html">Расписание</a></li>
+        <li><a href="contact.html">Контакты</a></li>
+        <li><a href="#about">О школе</a></li>
+      </ul>
+      <button class="mobile-menu">☰</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Онлайн школа "Беерот Ицхак"</h1>
+      <p class="subtitle">Качественное еврейское образование для детей от 4 до 16 лет со всего мира. Обучение на русском языке с опытными преподавателями.</p>
+      <a href="enroll.html" class="cta-button">Записаться на обучение</a>
+    </section>
+
+    <section class="features">
+      <div class="feature-card">
+        <div class="feature-icon">🎓</div>
+        <h3>Высокое качество образования</h3>
+        <p>Программа основана на классических программах израильских хейдеров и школ системы "Бейт Яаков"</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌍</div>
+        <h3>Доступно по всему миру</h3>
+        <p>Онлайн обучение позволяет детям получать качественное еврейское образование независимо от местоположения</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👨‍🏫</div>
+        <h3>Опытные преподаватели</h3>
+        <p>Уроки проводят опытные преподаватели, вкладывающие в работу всю свою душу</p>
+      </div>
+    </section>
+
+    <section class="info-section" id="about">
+      <h2>Преимущества нашей школы</h2>
+      <div class="info-grid">
+        <div class="info-item">
+          <h3>Современные технологии</h3>
+          <p>Полнофункциональная система WebEx создает атмосферу настоящего класса</p>
+        </div>
+        <div class="info-item">
+          <h3>Гибкое расписание</h3>
+          <p>Возможность выстраивания расписания под любого ученика с учетом предпочтений родителей</p>
+        </div>
+        <div class="info-item">
+          <h3>Индивидуальный подход</h3>
+          <p>Система индивидуального преподавания для максимальной эффективности обучения</p>
+        </div>
+        <div class="info-item">
+          <h3>Доступная стоимость</h3>
+          <p>Субсидированное обучение благодаря спонсорам. Бесплатный пробный месяц для новых учеников</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="subjects">
+      <h2>Изучаемые дисциплины</h2>
+      <div class="subjects-grid">
+        <div class="subject-tag">Алеф-бет</div>
+        <div class="subject-tag">Чтение</div>
+        <div class="subject-tag">Разговорный иврит</div>
+        <div class="subject-tag">Истории из Торы</div>
+        <div class="subject-tag">Рассказы о праведниках</div>
+        <div class="subject-tag">Еврейский календарь</div>
+        <div class="subject-tag">Еврейские законы</div>
+        <div class="subject-tag">Недельная глава Торы</div>
+        <div class="subject-tag">Еврейское мировоззрение</div>
+        <div class="subject-tag">Молитва</div>
+        <div class="subject-tag">Хумаш тайч</div>
+        <div class="subject-tag">Хумаш Раши</div>
+        <div class="subject-tag">Пророки</div>
+        <div class="subject-tag">Мишна</div>
+        <div class="subject-tag">Гемара</div>
+      </div>
+    </section>
+
+    <section class="stats-section">
+      <h2>15 лет успешной работы</h2>
+      <div class="stats-container">
+        <div class="stat-item">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">учеников прошло обучение</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">18</div>
+          <div class="stat-label">стран мира</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">60</div>
+          <div class="stat-label">городов</div>
+        </div>
+      </div>
+      <div class="achievement">
+        <p>Наши выпускники продолжили обучение в лучших учебных еврейских заведениях Израиля</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Онлайн школа "Беерот Ицхак". Пусть свет Торы разольется по всему миру!</p>
+    </div>
+  </footer>
+
+  <script>
+    // Плавная анимация при прокрутке
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Наблюдение за элементами для анимации
+    document.querySelectorAll('.feature-card, .info-item, .stat-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'all 0.6s ease';
+      observer.observe(el);
+    });
+
+    // Мобильное меню (базовая функциональность)
+    document.querySelector('.mobile-menu').addEventListener('click', function() {
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    // Плавная прокрутка для якорных ссылок
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
