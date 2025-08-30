@@ -57,14 +57,14 @@
     margin-bottom: 1rem;
   }
 
-  /* Цвета для ребе (мужские, синие тона) */
-  .rebbe1 { background: linear-gradient(45deg, #4facfe, #00f2fe); }
-  .rebbe2 { background: linear-gradient(45deg, #2193b0, #6dd5ed); }
-  .rebbe3 { background: linear-gradient(45deg, #1e3c72, #2a5298); }
-  .rebbe4 { background: linear-gradient(45deg, #36d1dc, #5b86e5); }
-  .rebbe5 { background: linear-gradient(45deg, #00c6ff, #0072ff); }
+  /* Цвета для ребе (мужские, более разные оттенки синего/бирюзового) */
+  .rebbe1 { background: linear-gradient(45deg, #0072ff, #00c6ff); }
+  .rebbe2 { background: linear-gradient(45deg, #0f2027, #2c5364); }
+  .rebbe3 { background: linear-gradient(45deg, #1a2980, #26d0ce); }
+  .rebbe4 { background: linear-gradient(45deg, #373b44, #4286f4); }
+  .rebbe5 { background: linear-gradient(45deg, #000046, #1cb5e0); }
 
-  /* Цвета для моры (женские, розовые/красные тона) */
+  /* Цвета для моры (женские, розовые/красные/фиолетовые) */
   .mora1 { background: linear-gradient(45deg, #ff758c, #ff7eb3); }
   .mora2 { background: linear-gradient(45deg, #ff9966, #ff5e62); }
   .mora3 { background: linear-gradient(45deg, #f7971e, #ffd200); }
@@ -77,11 +77,16 @@
     padding: 0.6rem 1rem;
     border-radius: 50px;
     font-weight: bold;
-    transition: opacity 0.3s ease;
+    transition: all 0.3s ease;
     display: inline-block;
   }
 
-  .zoom-card a:hover { opacity: 0.85; }
+  /* Подсветка при наведении */
+  .zoom-card a:hover {
+    opacity: 0.9;
+    box-shadow: 0 0 15px rgba(255,255,255,0.8);
+    transform: scale(1.05);
+  }
 
   @media (max-width: 500px) {
     .zoom-card a { padding: 0.5rem; font-size: 0.9rem; }
