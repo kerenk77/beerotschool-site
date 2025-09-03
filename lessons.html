@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Записи уроков — Beerot School</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; background:#f7f7f7; }
+    .container { max-width: 1000px; margin:0 auto; padding:2rem; }
+    h1 { text-align:center; margin-bottom:2rem; }
+    .search-box { text-align:center; margin-bottom:2rem; }
+    .search-box input {
+      width: 100%; max-width: 500px;
+      padding: 0.8rem; border: 1px solid #ccc;
+      border-radius: 8px; font-size: 1rem;
+    }
+    .lessons { display:grid; grid-template-columns:1fr; gap:2rem; }
+    .lesson {
+      background:#fff; padding:1rem; border-radius:10px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    }
+    iframe { width:100%; aspect-ratio:16/9; border-radius:8px; }
+    h3 { margin:0.5rem 0; }
+    p { color:#555; }
+    .hidden { display:none; }
+  </style>
+</head>
+<body>
+  <header id="siteHeader"></header>
+  <script src="menu.js"></script>
+
+  <main class="container">
+    <h1>Записи уроков</h1>
+    <div class="search-box">
+      <input id="search" type="text" placeholder="Поиск по урокам...">
+    </div>
+
+    <div class="lessons" id="lessons">
+      <div class="lesson" data-title="Презентация школы" data-desc="Вступительное слово">
+        <iframe src="https://www.youtube.com/embed/TaORyaX4zaU" frameborder="0" allowfullscreen></iframe>
+        <h3>Презентация школы</h3>
+        <p>Вступительное слово о нашей школе и её миссии.</p>
+      </div>
+
+      <div class="lesson" data-title="Урок 1" data-desc="Введение в программу">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+        <h3>Урок 1</h3>
+        <p>Введение в учебную программу.</p>
+      </div>
+
+      <div class="lesson" data-title="Урок 2" data-desc="Тема второй лекции">
+        <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4" frameborder="0" allowfullscreen></iframe>
+        <h3>Урок 2</h3>
+        <p>Тема второй лекции, важные моменты и примеры.</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const searchInput = document.getElementById('search');
+    const lessons = document.querySelectorAll('.lesson');
+
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.toLowerCase();
+      lessons.forEach(lesson => {
+        const text = (lesson.dataset.title + " " + lesson.dataset.desc).toLowerCase();
+        lesson.classList.toggle('hidden', !text.includes(q));
+      });
+    });
+  </script>
+</body>
+</html>
