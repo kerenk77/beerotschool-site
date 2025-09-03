@@ -3,99 +3,226 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
   <title>Записи уроков — Beerot School</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f4f4f9;
-    }
+    html { scroll-behavior: smooth; }
+    body { font-family: Arial, sans-serif; margin:0; background:#f7f7fb; color:#222; }
+    header { /* меню заполняет ваш menu.js */ }
 
-    .container {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 1rem;
-    }
+    .container { max-width:1200px; margin:1.5rem auto; padding:1rem; }
+    h1 { text-align:center; margin-bottom:1rem; color:#1a202c; }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 2rem;
-      color: #333;
+    .search-row { display:flex; justify-content:center; margin:0 0 1rem; }
+    .search-row input {
+      width:100%; max-width:640px; padding:0.6rem 0.9rem; border:1px solid #e2e8f0;
+      border-radius:10px; font-size:1rem; outline:none; background:#fff;
     }
 
     .video-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
+      display:grid;
+      gap:1rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      align-items:start;
     }
 
-    .video-card {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
+    .card {
+      background:#fff;
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 6px 18px rgba(0,0,0,0.06);
+      display:flex;
+      flex-direction:column;
+      min-height: 260px;
     }
 
-    .video-card iframe {
-      width: 100%;
-      height: 180px;
-      border: none;
+    .thumb-wrap {
+      width:100%;
+      height:0;
+      padding-bottom:56.25%; /* 16:9 ratio */
+      position:relative;
+      background:#eef2f7;
+    }
+    .thumb-wrap iframe {
+      position:absolute; left:0; top:0; width:100%; height:100%; border:0; display:block;
     }
 
-    .video-info {
-      padding: 1rem;
+    .card-body {
+      padding:0.8rem 0.9rem;
+      display:flex;
+      flex-direction:column;
+      gap:0.4rem;
+      flex:1;
     }
+    .title { font-size:0.98rem; margin:0; color:#0f1724; line-height:1.2; }
+    .meta { font-size:0.82rem; color:#718096; }
+    .desc { font-size:0.9rem; color:#4a5568; margin-top:0.2rem; flex:1; overflow:hidden; }
 
-    .video-info h3 {
-      margin: 0 0 0.5rem;
-      font-size: 1rem;
-      color: #222;
-    }
+    .actions { display:flex; gap:0.5rem; margin-top:0.6rem; flex-wrap:wrap; }
+    .btn { text-decoration:none; padding:0.45rem 0.7rem; border-radius:8px; font-weight:600; font-size:0.88rem; }
+    .btn-watch { background:#3b82f6; color:#fff; }
+    .btn-open { background:#eef2ff; color:#0f1724; border:1px solid rgba(59,130,246,0.12); }
 
-    .video-info p {
-      font-size: 0.9rem;
-      color: #555;
-      margin: 0;
+    .hidden { display:none !important; }
+
+    @media (max-width:520px) {
+      .card { min-height:220px; }
+      .title { font-size:0.95rem; }
     }
   </style>
 </head>
 <body>
-<header id="siteHeader"></header>
-<script src="menu.js"></script>
+
+  <!-- Меню (твоя menu.js должен заполнять #siteHeader) -->
+  <header id="siteHeader"></header>
+  <script src="menu.js"></script>
+
   <div class="container">
     <h1>Записи уроков</h1>
 
-    <div class="video-grid">
-      <!-- Новый урок всегда добавляется сверху -->
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/watch?v=0wMFs4PsZyA" allowfullscreen></iframe>
-        <div class="video-info">
-          <h3>Притча "Царь в поле", о месяце Элуль и десяти дней раскаяния</h3>
-          <p>В чем особен месяц Элуль? И как объяснить эту особенность детям? Эта притча даст ответы на эти вопросы!</p>
-        </div>
-      </div>
-
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/watch?v=0hhyiBh7f7w&t=31s" allowfullscreen></iframe>
-        <div class="video-info">
-          <h3>Месяц Элуль. </h3>
-          <p>Рассказывает ребе Исроель</p>
-        </div>
-      </div>
-
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/watch?v=m6WTTctVMvI" allowfullscreen></iframe>
-        <div class="video-info">
-          <h3>Мальчик, спасший корабль</h3>
-          <p>Рассказывает ребе Исроель.</p>
-        </div>
-      </div>
+    <!-- Поиск -->
+    <div class="search-row">
+      <input id="search" type="text" placeholder="Поиск по названию или описанию...">
     </div>
-  </div>
+
+    <!-- Сетка карточек -->
+    <div id="grid" class="video-grid">
+
+      <!-- Примеры — ОБЯЗАТЕЛЬНО: используем embed-формат -->
+      <article class="card" data-title="Притча 'Царь в поле', о месяце Элуль" data-desc="В чем особен месяц Элуль? И как объяснить...">
+        <div class="thumb-wrap">
+          <iframe src="https://www.youtube.com/embed/0wMFs4PsZyA?rel=0&modestbranding=1" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowfullscreen></iframe>
+        </div>
+        <div class="card-body">
+          <h3 class="title">Притча "Царь в поле", о месяце Элуль и десяти дней раскаяния</h3>
+          <div class="meta">Beerot School</div>
+          <div class="desc">В чем особен месяц Элуль? И как объяснить эту особенность детям? Эта притча даст ответы на эти вопросы!</div>
+          <div class="actions">
+            <a class="btn btn-watch" href="https://www.youtube.com/watch?v=0wMFs4PsZyA" target="_blank" rel="noopener">Смотреть</a>
+            <a class="btn btn-open" href="https://www.youtube.com/embed/0wMFs4PsZyA" target="_blank" rel="noopener">Открыть</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-title="Месяц Элуль" data-desc="Рассказывает ребе Исроель">
+        <div class="thumb-wrap">
+          <!-- Здесь начало с 31 секунды => start=31 -->
+          <iframe src="https://www.youtube.com/embed/0hhyiBh7f7w?start=31&rel=0&modestbranding=1" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowfullscreen></iframe>
+        </div>
+        <div class="card-body">
+          <h3 class="title">Месяц Элуль</h3>
+          <div class="meta">Beerot School</div>
+          <div class="desc">Рассказывает ребе Исроель.</div>
+          <div class="actions">
+            <a class="btn btn-watch" href="https://www.youtube.com/watch?v=0hhyiBh7f7w&t=31s" target="_blank" rel="noopener">Смотреть</a>
+            <a class="btn btn-open" href="https://www.youtube.com/embed/0hhyiBh7f7w?start=31" target="_blank" rel="noopener">Открыть</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-title="Мальчик, спасший корабль" data-desc="Рассказ ребе Исроель">
+        <div class="thumb-wrap">
+          <iframe src="https://www.youtube.com/embed/m6WTTctVMvI?rel=0&modestbranding=1" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowfullscreen></iframe>
+        </div>
+        <div class="card-body">
+          <h3 class="title">Мальчик, спасший корабль</h3>
+          <div class="meta">Beerot School</div>
+          <div class="desc">Рассказывает ребе Исроель.</div>
+          <div class="actions">
+            <a class="btn btn-watch" href="https://www.youtube.com/watch?v=m6WTTctVMvI" target="_blank" rel="noopener">Смотреть</a>
+            <a class="btn btn-open" href="https://www.youtube.com/embed/m6WTTctVMvI" target="_blank" rel="noopener">Открыть</a>
+          </div>
+        </div>
+      </article>
+
+    </div> <!-- #grid -->
+  </div> <!-- .container -->
+
+  <script>
+    // Поиск по карточкам (по data-title и data-desc)
+    const searchInput = document.getElementById('search');
+    const grid = document.getElementById('grid');
+
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.trim().toLowerCase();
+      const cards = grid.querySelectorAll('.card');
+      cards.forEach(card => {
+        const hay = ((card.dataset.title || '') + ' ' + (card.dataset.desc || '')).toLowerCase();
+        card.classList.toggle('hidden', q !== '' && !hay.includes(q));
+      });
+    });
+
+    // --- Утилиты: добавление карточки в начало (новые сверху) ---
+    function extractVideoId(input) {
+      if (!input) return null;
+      input = input.trim();
+      // если уже ID
+      if (/^[A-Za-z0-9_-]{11}$/.test(input)) return input;
+      try {
+        // попробуем распарсить как URL
+        const url = new URL(input);
+        // youtu.be/ID
+        if (url.hostname.includes('youtu.be')) return url.pathname.slice(1);
+        // /embed/ID
+        let m = url.pathname.match(/\/embed\/([A-Za-z0-9_-]{11})/);
+        if (m) return m[1];
+        // v=ID
+        if (url.searchParams.get('v')) return url.searchParams.get('v');
+      } catch (e) {
+        // не URL — возможно, короткая форма с &t=...
+        const m = input.match(/v=([A-Za-z0-9_-]{11})/);
+        if (m) return m[1];
+      }
+      return null;
+    }
+
+    // Добавляет новую карточку в начало (#grid)
+    // Параметры: { idOrUrl: string, title: string, desc: string, start: number }
+    function addCard({ idOrUrl, title = 'Без названия', desc = '', start = 0 }) {
+      const id = extractVideoId(idOrUrl);
+      if (!id) {
+        alert('Неверный ID/URL YouTube: ' + idOrUrl);
+        return;
+      }
+      const startParam = start && Number(start) > 0 ? `?start=${Number(start)}&rel=0&modestbranding=1` : `?rel=0&modestbranding=1`;
+      const embed = `https://www.youtube.com/embed/${encodeURIComponent(id)}${startParam}`;
+      const watch = `https://www.youtube.com/watch?v=${encodeURIComponent(id)}${start ? '&t=' + Number(start) + 's' : ''}`;
+
+      const el = document.createElement('article');
+      el.className = 'card';
+      el.dataset.title = title;
+      el.dataset.desc = desc;
+      el.innerHTML = `
+        <div class="thumb-wrap">
+          <iframe src="${embed}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="card-body">
+          <h3 class="title">${escapeHtml(title)}</h3>
+          <div class="meta">Beerot School</div>
+          <div class="desc">${escapeHtml(desc)}</div>
+          <div class="actions">
+            <a class="btn btn-watch" href="${watch}" target="_blank" rel="noopener">Смотреть</a>
+            <a class="btn btn-open" href="${embed}" target="_blank" rel="noopener">Открыть</a>
+          </div>
+        </div>
+      `;
+      grid.insertAdjacentElement('afterbegin', el); // вставляет сверху
+    }
+
+    // Простые санитайзеры
+    function escapeHtml(s=''){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
+    // Пример: как добавить карточку программно (вставляется сверху)
+    // addCard({ idOrUrl: 'https://www.youtube.com/watch?v=TaORyaX4zaU', title: 'Новый урок', desc: 'Краткое описание', start: 10 });
+
+    // Если хочешь: можно сохранять список в JSON и подгружать динамически.
+  </script>
 
 </body>
 </html>
