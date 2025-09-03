@@ -104,8 +104,6 @@
       title: "Мальчик, спасший корабль",
       desc: "Рассказывает ребе Исроель."
     }
-    // 👉 Добавляй сюда новые записи (сверху)
-    // { id: "VIDEO_ID", title: "Название", desc: "Описание" }
   ];
 
   const grid = document.getElementById("grid");
@@ -125,7 +123,7 @@
     card.dataset.desc = desc;
 
     card.innerHTML = `
-      <div class="thumb-wrap" data-embed="${embed}">
+      <div class="thumb-wrap" data-watch="${watch}">
         <img src="${thumb}" alt="${title}">
       </div>
       <div class="card-body">
@@ -139,11 +137,9 @@
       </div>
     `;
 
-    // При клике заменяем картинку на iframe
+    // При клике открываем YouTube в новой вкладке
     card.querySelector(".thumb-wrap").addEventListener("click", e => {
-      e.currentTarget.innerHTML = `<iframe src="${embed}&autoplay=1"
-        frameborder="0" allow="accelerometer; autoplay; clipboard-write; 
-        encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      window.open(watch, "_blank");
     });
 
     return card;
@@ -170,6 +166,5 @@
     });
   });
 </script>
-
-</body>
+  </body>
 </html>
