@@ -8,7 +8,6 @@
   <style>
     html { scroll-behavior: smooth; }
     body { font-family: Arial, sans-serif; margin:0; background:#f7f7fb; color:#222; }
-    header { /* меню заполняет ваш menu.js */ }
 
     .container { max-width:1200px; margin:1.5rem auto; padding:1rem; }
     h1 { text-align:center; margin-bottom:1rem; color:#1a202c; }
@@ -33,30 +32,30 @@
       box-shadow:0 6px 18px rgba(0,0,0,0.06);
       display:flex;
       flex-direction:column;
-      min-height: 260px;
     }
 
     .thumb-wrap {
       width:100%;
       height:0;
-      padding-bottom:56.25%; /* 16:9 ratio */
+      padding-bottom:56.25%; /* 16:9 */
       position:relative;
       background:#eef2f7;
+      cursor:pointer;
     }
-    .thumb-wrap iframe {
-      position:absolute; left:0; top:0; width:100%; height:100%; border:0; display:block;
+    .thumb-wrap img {
+      position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;
+    }
+    .thumb-wrap::after {
+      content:"▶";
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      font-size:2.5rem; color:white; text-shadow:0 2px 8px rgba(0,0,0,0.5);
+      pointer-events:none;
     }
 
-    .card-body {
-      padding:0.8rem 0.9rem;
-      display:flex;
-      flex-direction:column;
-      gap:0.4rem;
-      flex:1;
-    }
-    .title { font-size:0.98rem; margin:0; color:#0f1724; line-height:1.2; }
+    .card-body { padding:0.8rem 0.9rem; display:flex; flex-direction:column; gap:0.4rem; flex:1; }
+    .title { font-size:0.98rem; margin:0; color:#0f1724; }
     .meta { font-size:0.82rem; color:#718096; }
-    .desc { font-size:0.9rem; color:#4a5568; margin-top:0.2rem; flex:1; overflow:hidden; }
+    .desc { font-size:0.9rem; color:#4a5568; flex:1; overflow:hidden; }
 
     .actions { display:flex; gap:0.5rem; margin-top:0.6rem; flex-wrap:wrap; }
     .btn { text-decoration:none; padding:0.45rem 0.7rem; border-radius:8px; font-weight:600; font-size:0.88rem; }
@@ -65,164 +64,112 @@
 
     .hidden { display:none !important; }
 
-    @media (max-width:520px) {
-      .card { min-height:220px; }
-      .title { font-size:0.95rem; }
-    }
+    .show-more { display:block; margin:1.5rem auto; padding:0.6rem 1.2rem;
+      background:#3b82f6; color:#fff; border:none; border-radius:8px;
+      font-size:1rem; cursor:pointer; }
   </style>
 </head>
 <body>
 
-  <!-- Меню (твоя menu.js должен заполнять #siteHeader) -->
-  <header id="siteHeader"></header>
-  <script src="menu.js"></script>
+<header id="siteHeader"></header>
+<script src="menu.js"></script>
 
-  <div class="container">
-    <h1>Записи уроков</h1>
+<div class="container">
+  <h1>Записи уроков</h1>
 
-    <!-- Поиск -->
-    <div class="search-row">
-      <input id="search" type="text" placeholder="Поиск по названию или описанию...">
-    </div>
+  <div class="search-row">
+    <input id="search" type="text" placeholder="Поиск по названию или описанию...">
+  </div>
 
-    <!-- Сетка карточек -->
-    <div id="grid" class="video-grid">
+  <div id="grid" class="video-grid"></div>
+  <button id="showMore" class="show-more">Показать ещё</button>
+</div>
 
-      <!-- Примеры — ОБЯЗАТЕЛЬНО: используем embed-формат -->
-      <article class="card" data-title="Притча 'Царь в поле', о месяце Элуль" data-desc="В чем особен месяц Элуль? И как объяснить...">
-        <div class="thumb-wrap">
-          <iframe src="https://www.youtube.com/embed/0wMFs4PsZyA?rel=0&modestbranding=1" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                  allowfullscreen></iframe>
+<script>
+  // === ДАННЫЕ УРОКОВ ===
+  const lessons = [
+    {
+      id: "0wMFs4PsZyA",
+      title: "Притча 'Царь в поле', о месяце Элуль и десяти дней раскаяния",
+      desc: "В чем особен месяц Элуль? И как объяснить эту особенность детям? Эта притча даст ответы!",
+    },
+    {
+      id: "0hhyiBh7f7w",
+      title: "Месяц Элуль",
+      desc: "Рассказывает ребе Исроель.",
+      start: 31
+    },
+    {
+      id: "m6WTTctVMvI",
+      title: "Мальчик, спасший корабль",
+      desc: "Рассказывает ребе Исроель."
+    }
+    // 👉 Добавляй сюда новые записи (сверху)
+    // { id: "VIDEO_ID", title: "Название", desc: "Описание" }
+  ];
+
+  const grid = document.getElementById("grid");
+  const showMoreBtn = document.getElementById("showMore");
+  let shownCount = 0;
+  const perPage = 8;
+
+  function renderCard(lesson) {
+    const { id, title, desc, start=0 } = lesson;
+    const thumb = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+    const embed = `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1${start?`&start=${start}`:""}`;
+    const watch = `https://www.youtube.com/watch?v=${id}${start?`&t=${start}s`:""}`;
+
+    const card = document.createElement("article");
+    card.className = "card";
+    card.dataset.title = title;
+    card.dataset.desc = desc;
+
+    card.innerHTML = `
+      <div class="thumb-wrap" data-embed="${embed}">
+        <img src="${thumb}" alt="${title}">
+      </div>
+      <div class="card-body">
+        <h3 class="title">${title}</h3>
+        <div class="meta">Beerot School</div>
+        <div class="desc">${desc}</div>
+        <div class="actions">
+          <a class="btn btn-watch" href="${watch}" target="_blank">Смотреть</a>
+          <a class="btn btn-open" href="${embed}" target="_blank">Открыть</a>
         </div>
-        <div class="card-body">
-          <h3 class="title">Притча "Царь в поле", о месяце Элуль и десяти дней раскаяния</h3>
-          <div class="meta">Beerot School</div>
-          <div class="desc">В чем особен месяц Элуль? И как объяснить эту особенность детям? Эта притча даст ответы на эти вопросы!</div>
-          <div class="actions">
-            <a class="btn btn-watch" href="https://www.youtube.com/watch?v=0wMFs4PsZyA" target="_blank" rel="noopener">Смотреть</a>
-            <a class="btn btn-open" href="https://www.youtube.com/embed/0wMFs4PsZyA" target="_blank" rel="noopener">Открыть</a>
-          </div>
-        </div>
-      </article>
+      </div>
+    `;
 
-      <article class="card" data-title="Месяц Элуль" data-desc="Рассказывает ребе Исроель">
-        <div class="thumb-wrap">
-          <!-- Здесь начало с 31 секунды => start=31 -->
-          <iframe src="https://www.youtube.com/embed/0hhyiBh7f7w?start=31&rel=0&modestbranding=1" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                  allowfullscreen></iframe>
-        </div>
-        <div class="card-body">
-          <h3 class="title">Месяц Элуль</h3>
-          <div class="meta">Beerot School</div>
-          <div class="desc">Рассказывает ребе Исроель.</div>
-          <div class="actions">
-            <a class="btn btn-watch" href="https://www.youtube.com/watch?v=0hhyiBh7f7w&t=31s" target="_blank" rel="noopener">Смотреть</a>
-            <a class="btn btn-open" href="https://www.youtube.com/embed/0hhyiBh7f7w?start=31" target="_blank" rel="noopener">Открыть</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="card" data-title="Мальчик, спасший корабль" data-desc="Рассказ ребе Исроель">
-        <div class="thumb-wrap">
-          <iframe src="https://www.youtube.com/embed/m6WTTctVMvI?rel=0&modestbranding=1" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                  allowfullscreen></iframe>
-        </div>
-        <div class="card-body">
-          <h3 class="title">Мальчик, спасший корабль</h3>
-          <div class="meta">Beerot School</div>
-          <div class="desc">Рассказывает ребе Исроель.</div>
-          <div class="actions">
-            <a class="btn btn-watch" href="https://www.youtube.com/watch?v=m6WTTctVMvI" target="_blank" rel="noopener">Смотреть</a>
-            <a class="btn btn-open" href="https://www.youtube.com/embed/m6WTTctVMvI" target="_blank" rel="noopener">Открыть</a>
-          </div>
-        </div>
-      </article>
-
-    </div> <!-- #grid -->
-  </div> <!-- .container -->
-
-  <script>
-    // Поиск по карточкам (по data-title и data-desc)
-    const searchInput = document.getElementById('search');
-    const grid = document.getElementById('grid');
-
-    searchInput.addEventListener('input', () => {
-      const q = searchInput.value.trim().toLowerCase();
-      const cards = grid.querySelectorAll('.card');
-      cards.forEach(card => {
-        const hay = ((card.dataset.title || '') + ' ' + (card.dataset.desc || '')).toLowerCase();
-        card.classList.toggle('hidden', q !== '' && !hay.includes(q));
-      });
+    // При клике заменяем картинку на iframe
+    card.querySelector(".thumb-wrap").addEventListener("click", e => {
+      e.currentTarget.innerHTML = `<iframe src="${embed}&autoplay=1"
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; 
+        encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
     });
 
-    // --- Утилиты: добавление карточки в начало (новые сверху) ---
-    function extractVideoId(input) {
-      if (!input) return null;
-      input = input.trim();
-      // если уже ID
-      if (/^[A-Za-z0-9_-]{11}$/.test(input)) return input;
-      try {
-        // попробуем распарсить как URL
-        const url = new URL(input);
-        // youtu.be/ID
-        if (url.hostname.includes('youtu.be')) return url.pathname.slice(1);
-        // /embed/ID
-        let m = url.pathname.match(/\/embed\/([A-Za-z0-9_-]{11})/);
-        if (m) return m[1];
-        // v=ID
-        if (url.searchParams.get('v')) return url.searchParams.get('v');
-      } catch (e) {
-        // не URL — возможно, короткая форма с &t=...
-        const m = input.match(/v=([A-Za-z0-9_-]{11})/);
-        if (m) return m[1];
-      }
-      return null;
-    }
+    return card;
+  }
 
-    // Добавляет новую карточку в начало (#grid)
-    // Параметры: { idOrUrl: string, title: string, desc: string, start: number }
-    function addCard({ idOrUrl, title = 'Без названия', desc = '', start = 0 }) {
-      const id = extractVideoId(idOrUrl);
-      if (!id) {
-        alert('Неверный ID/URL YouTube: ' + idOrUrl);
-        return;
-      }
-      const startParam = start && Number(start) > 0 ? `?start=${Number(start)}&rel=0&modestbranding=1` : `?rel=0&modestbranding=1`;
-      const embed = `https://www.youtube.com/embed/${encodeURIComponent(id)}${startParam}`;
-      const watch = `https://www.youtube.com/watch?v=${encodeURIComponent(id)}${start ? '&t=' + Number(start) + 's' : ''}`;
+  function loadMore() {
+    const slice = lessons.slice(shownCount, shownCount+perPage);
+    slice.forEach(lesson => grid.appendChild(renderCard(lesson)));
+    shownCount += slice.length;
+    if (shownCount >= lessons.length) showMoreBtn.style.display = "none";
+  }
 
-      const el = document.createElement('article');
-      el.className = 'card';
-      el.dataset.title = title;
-      el.dataset.desc = desc;
-      el.innerHTML = `
-        <div class="thumb-wrap">
-          <iframe src="${embed}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <div class="card-body">
-          <h3 class="title">${escapeHtml(title)}</h3>
-          <div class="meta">Beerot School</div>
-          <div class="desc">${escapeHtml(desc)}</div>
-          <div class="actions">
-            <a class="btn btn-watch" href="${watch}" target="_blank" rel="noopener">Смотреть</a>
-            <a class="btn btn-open" href="${embed}" target="_blank" rel="noopener">Открыть</a>
-          </div>
-        </div>
-      `;
-      grid.insertAdjacentElement('afterbegin', el); // вставляет сверху
-    }
+  // Первоначальная загрузка
+  loadMore();
+  showMoreBtn.addEventListener("click", loadMore);
 
-    // Простые санитайзеры
-    function escapeHtml(s=''){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
-
-    // Пример: как добавить карточку программно (вставляется сверху)
-    // addCard({ idOrUrl: 'https://www.youtube.com/watch?v=TaORyaX4zaU', title: 'Новый урок', desc: 'Краткое описание', start: 10 });
-
-    // Если хочешь: можно сохранять список в JSON и подгружать динамически.
-  </script>
+  // === Поиск ===
+  const searchInput = document.getElementById("search");
+  searchInput.addEventListener("input", () => {
+    const q = searchInput.value.toLowerCase();
+    grid.querySelectorAll(".card").forEach(card => {
+      const hay = (card.dataset.title + " " + card.dataset.desc).toLowerCase();
+      card.classList.toggle("hidden", q && !hay.includes(q));
+    });
+  });
+</script>
 
 </body>
 </html>
