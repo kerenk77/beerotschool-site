@@ -31,59 +31,44 @@
       margin-bottom: 2rem;
     }
 
-    .schedule-container {
-      display: flex;
-      justify-content: center; /* 🔹 центрируем по горизонтали */
-      margin: 0 auto;
-      width: 100%;
-    }
+   .schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.schedule-table th, .schedule-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+@media (max-width: 600px) {
+  .schedule-table, .schedule-table thead, .schedule-table tbody, .schedule-table th, .schedule-table td, .schedule-table tr {
+    display: block;
+  }
+  .schedule-table thead {
+    display: none;
+  }
+  .schedule-table tr {
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    background: #f9f9f9;
+  }
+  .schedule-table td {
+    text-align: left;
+    padding-left: 50%;
+    position: relative;
+  }
+  .schedule-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    top: 8px;
+    font-weight: bold;
+  }
+}
 
-    .schedule-container iframe {
-      width: 74%;
-      max-width: 1000px;  /* 🔹 ограничение ширины */
-      height: 1800px;      /* 🔹 высокая рамка для удобства */
-      border: 0;
-      border-radius: 15px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-    }
-
-    header {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.5rem 1rem;
-    }
-
-    .logo img { height: 50px; }
-
-    nav { position: relative; }
-
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 2rem;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: #4a5568;
-      font-weight: 500;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      background: #667eea;
-      color: white;
-      transform: translateY(-2px);
-    }
+  
 
     .hamburger {
       display: none;
@@ -130,12 +115,38 @@
   <!-- Контент -->
   <div class="container">
     <h1>Расписание занятий</h1>
-    <div class="schedule-container">
-      <iframe 
-        src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRXRBl4YNIksCcl6axtnLh6Dy5mFcvhraY4D17cr3UtpEMX8K7ypVvLc7WHLdM0ypBbAh3LZcCq97Lv/pubhtml?gid=507837118&single=true" 
-        allowfullscreen>
-      </iframe>
-    </div>
+    <div id="schedule"></div>
+
+<script>
+async function loadSchedule() {
+  const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRXRBl4YNIksCcl6axtnLh6Dy5mFcvhraY4D17cr3UtpEMX8K7ypVvLc7WHLdM0ypBbAh3LZcCq97Lv/pub?gid=507837118&single=true&output=tsv";
+  const res = await fetch(url);
+  const text = await res.text();
+
+  const rows = text.trim().split("\n").map(r => r.split("\t"));
+  const headers = rows[0];
+  const data = rows.slice(1);
+
+  let html = '<table class="schedule-table"><thead><tr>';
+  headers.forEach(h => html += `<th>${h}</th>`);
+  html += '</tr></thead><tbody>';
+
+  data.forEach(row => {
+    html += '<tr>';
+    row.forEach((cell, i) => {
+      html += `<td data-label="${headers[i]}">${cell}</td>`;
+    });
+    html += '</tr>';
+  });
+
+  html += '</tbody></table>';
+  document.getElementById("schedule").innerHTML = html;
+}
+
+loadSchedule();
+</script>
+
+
   </div>
 </body>
 </html>
