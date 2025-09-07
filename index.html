@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
   <title>Онлайн школа "Беерот Ицхак"</title>
-
-  <!-- Стили -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="style.css">
   <link rel="preload" as="image" href="hero-banner.jpg" imagesrcset="hero-banner.jpg">
 </head>
@@ -21,10 +18,7 @@
 
     <!-- HERO баннер -->
     <section class="hero-banner">
-      <!-- SEO-заголовок (скрытый) -->
       <h1 class="visually-hidden">Онлайн школа «Беерот Ицхак»</h1>
-
-      <!-- Кнопка поверх баннера -->
       <a class="banner-cta" href="enroll.html">Записаться</a>
     </section>
 
@@ -131,7 +125,8 @@
     <section class="lesson-examples">
       <h2>Примеры наших уроков</h2>
       <div class="lesson-grid">
-        <!-- Урок 1 -->
+
+        <!-- Карточка урока 1 -->
         <div class="lesson-card">
           <div class="lesson-thumbnail">
             <iframe src="https://www.youtube.com/embed/AA_QSUAViZU" frameborder="0" allowfullscreen></iframe>
@@ -143,7 +138,7 @@
           </div>
         </div>
 
-        <!-- Урок 2 -->
+        <!-- Карточка урока 2 -->
         <div class="lesson-card">
           <div class="lesson-thumbnail">
             <iframe src="https://www.youtube.com/embed/Tec6k7GyfIM" frameborder="0" allowfullscreen></iframe>
@@ -155,7 +150,7 @@
           </div>
         </div>
 
-        <!-- Урок 3 -->
+        <!-- Карточка урока 3 -->
         <div class="lesson-card">
           <div class="lesson-thumbnail">
             <iframe src="https://www.youtube.com/embed/r3IwsVyAczw" frameborder="0" allowfullscreen></iframe>
@@ -167,7 +162,7 @@
           </div>
         </div>
 
-        <!-- Урок 4 -->
+        <!-- Карточка урока 4 -->
         <div class="lesson-card">
           <div class="lesson-thumbnail">
             <iframe src="https://www.youtube.com/embed/sK1gSi5yP5E" frameborder="0" allowfullscreen></iframe>
@@ -179,7 +174,7 @@
           </div>
         </div>
 
-        <!-- Урок 5 -->
+        <!-- Карточка урока 5 -->
         <div class="lesson-card">
           <div class="lesson-thumbnail">
             <iframe src="https://www.youtube.com/embed/GvtZ7ThnOyU" frameborder="0" allowfullscreen></iframe>
@@ -190,6 +185,7 @@
             <p class="lesson-description">Специализированные уроки еврейских законов и традиций для девочек старшего возраста</p>
           </div>
         </div>
+
       </div>
 
       <!-- YouTube канал -->
@@ -204,7 +200,7 @@
 
   </main>
 
-  <!-- Подвал -->
+  <!-- Футер -->
   <footer>
     <p>&copy; 2025 Онлайн школа "Беерот Ицхак". Пусть свет Торы разольется по всему миру!</p>
     <div class="contacts">
@@ -221,42 +217,5 @@
     </div>
   </footer>
 
-  <!-- Скрипты -->
-  <script>
-    // Плавная анимация при прокрутке
-    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.feature-card, .info-item, .stat-item, .lesson-card').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(30px)';
-      el.style.transition = 'all 0.6s ease';
-      observer.observe(el);
-    });
-
-    // Мобильное меню
-    document.querySelector('.hamburger')?.addEventListener('click', function() {
-      const navLinks = document.querySelector('.nav-links');
-      navLinks.classList.toggle('active');
-    });
-
-    // Плавная прокрутка якорей
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-  </script>
 </body>
 </html>
