@@ -126,68 +126,40 @@ async function loadSchedule() {
   const rows = text.trim().split("\n").map(r => r.split("\t"));
   const container = document.getElementById("schedule");
 
-  let rowIndex = 0;
-  while (rowIndex < rows.length) {
-    const row = rows[rowIndex].map(c => c.trim());
-    const nonEmpty = row.filter(c => c !== "").length;
+  rows.forEach(row => {
+    const trimmed = row.map(c => c.trim());
+    const nonEmpty = trimmed.filter(c => c !== "").length;
 
     // --- Заголовок класса ---
-    if (nonEmpty === 1 && row[0] !== "") {
+    if (nonEmpty === 1 && trimmed[0] !== "") {
       const title = document.createElement("div");
       title.className = "class-title";
 
-      // Определяем цвет
-      if (row[0].toLowerCase().includes("בת") || row[0].toLowerCase().includes("מורה")) {
+      // Цвет по ключевому слову
+      if (trimmed[0].toLowerCase().includes("мора")) {
         title.classList.add("female");
       } else {
         title.classList.add("male");
       }
 
-      title.textContent = row[0];
+      title.textContent = trimmed[0];
       container.appendChild(title);
-      rowIndex++;
-      continue;
-    }
+    } 
+    // --- Обычная строка расписания ---
+    else if (nonEmpty > 0) {
+      const line = document.createElement("div");
+      line.className = "schedule-row";
 
-    // --- Пара строк расписания (для объединения времени) ---
-    const row1 = rows[rowIndex] || [];
-    const row2 = rows[rowIndex + 1] || [];
-
-    // Создаём строку контейнер
-    const line = document.createElement("div");
-    line.className = "schedule-row";
-
-    // Первая колонка (время)
-    const timeDiv = document.createElement("div");
-    timeDiv.className = "cell time-cell";
-    timeDiv.setAttribute("rowspan", "2");
-    timeDiv.textContent = row1[0] || "";
-    line.appendChild(timeDiv);
-
-    // Остальные колонки первой строки
-    for (let i = 1; i < row1.length; i++) {
-      const div = document.createElement("div");
-      div.className = "cell";
-      div.textContent = row1[i] || "";
-      line.appendChild(div);
-    }
-    container.appendChild(line);
-
-    // Вторая строка (без времени)
-    if (row2.length > 0) {
-      const line2 = document.createElement("div");
-      line2.className = "schedule-row second-row";
-      for (let i = 1; i < row2.length; i++) {
+      trimmed.forEach(cell => {
         const div = document.createElement("div");
         div.className = "cell";
-        div.textContent = row2[i] || "";
-        line2.appendChild(div);
-      }
-      container.appendChild(line2);
-    }
+        div.textContent = cell;
+        line.appendChild(div);
+      });
 
-    rowIndex += 2; // перескакиваем на следующую пару
-  }
+      container.appendChild(line);
+    }
+  });
 }
 
 loadSchedule();
@@ -215,7 +187,7 @@ loadSchedule();
 
 .schedule-row {
   display: grid;
-  grid-template-columns: 120px repeat(auto-fit, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 4px;
   margin: 2px 0;
 }
@@ -227,22 +199,7 @@ loadSchedule();
   text-align: center;
   font-size: 0.95rem;
 }
-
-.time-cell {
-  grid-row: span 2; /* объединяем на 2 строки */
-  background: #dbe3ff;
-  font-weight: bold;
-}
-
-.second-row {
-  display: grid;
-  grid-template-columns: 120px repeat(auto-fit, minmax(120px, 1fr));
-  grid-template-columns: 1fr repeat(auto-fit, minmax(120px, 1fr));
-  margin-top: -6px; /* чтобы визуально время было по центру */
-}
 </style>
 
-
-  </div>
 </body>
 </html>
