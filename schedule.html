@@ -143,16 +143,20 @@ async function loadSchedule() {
       container.appendChild(title);
     } 
     // --- строка "Время ..." ---
-    else if (trimmed[0] && trimmed[0].toLowerCase().startsWith("время")) {
+    else if (trimmed[0] && trimmed[0].toLowerCase().startsWith("время"))
+    {
       const line = document.createElement("div");
       line.className = "schedule-row time-header";
-      trimmed.forEach(cell => {
-        const div = document.createElement("div");
-        div.className = "cell";
-        if (/^\d+$/.test(cell)) div.classList.add("bold-number");
-        div.textContent = cell;
-        line.appendChild(div);
-      });
+     trimmed.forEach(cell => {
+  const div = document.createElement("div");
+  div.className = "cell";
+
+  // если есть хотя бы одна цифра → жирный
+  if (/\d/.test(cell)) div.classList.add("bold-number");
+
+  div.textContent = cell;
+  line.appendChild(div);
+});
       container.appendChild(line);
     }
     // --- обычная строка расписания ---
