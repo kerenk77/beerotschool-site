@@ -103,10 +103,18 @@
 
     .cell.bold-number { font-weight: bold; }
 
-    /* адаптив для таблиц */
+    /* адаптив для мобильных */
     @media (max-width: 600px) {
       .schedule-row {
-        grid-template-columns: 1fr; 
+        grid-template-columns: 1fr; /* каждая ячейка на всю ширину */
+        gap: 4px;
+      }
+      .cell {
+        text-align: left; /* текст слева для удобства */
+        padding-left: 12px;
+      }
+      .time-header .cell {
+        text-align: center; /* сохраняем центрирование для времени */
       }
     }
   </style>
@@ -167,8 +175,7 @@
           trimmed.forEach(cell => {
             const div = document.createElement("div");
             div.className = "cell";
-            // жирные все числа
-            if (/\d/.test(cell)) div.classList.add("bold-number");
+            if (/\d/.test(cell)) div.classList.add("bold-number"); // жирные все числа
             div.textContent = cell;
             line.appendChild(div);
           });
