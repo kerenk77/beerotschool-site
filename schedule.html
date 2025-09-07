@@ -115,36 +115,90 @@
   <!-- Контент -->
   <div class="container">
     <h1>Расписание занятий</h1>
-    <div id="schedule"></div>
+  <div id="schedule"></div>
 
 <script>
 async function loadSchedule() {
   const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRXRBl4YNIksCcl6axtnLh6Dy5mFcvhraY4D17cr3UtpEMX8K7ypVvLc7WHLdM0ypBbAh3LZcCq97Lv/pub?gid=507837118&single=true&output=tsv";
-  const res = await fetch(url);
-  const text = await res.text();
+  const response = await fetch(url);
+  const text = await response.text();
 
   const rows = text.trim().split("\n").map(r => r.split("\t"));
-  const headers = rows[0];
-  const data = rows.slice(1);
+  const container = document.getElementById("schedule");
 
-  let html = '<table class="schedule-table"><thead><tr>';
-  headers.forEach(h => html += `<th>${h}</th>`);
-  html += '</tr></thead><tbody>';
+  rows.forEach(row => {
+    const nonEmpty = row.filter(cell => cell.trim() !== "").length;
 
-  data.forEach(row => {
-    html += '<tr>';
-    row.forEach((cell, i) => {
-      html += `<td data-label="${headers[i]}">${cell}</td>`;
-    });
-    html += '</tr>';
+    // --- Если строка только с названием класса ---
+    if (nonEmpty === 1) {
+      const title = document.createElement("div");
+      title.className = "class-title";
+
+      // Цвет по ключевому слову
+      if (row[0].toLowerCase().includes("мора")) {
+        title.classList.add("female");
+      } else {
+        title.classList.add("male");
+      }
+
+      title.textContent = row[0];
+      container.appendChild(title);
+    } 
+    // --- Если это обычная строка расписания ---
+    else {
+      const line = document.createElement("div");
+      line.className = "schedule-row";
+
+      row.forEach(cell => {
+        const div = document.createElement("div");
+        div.className = "cell";
+        div.textContent = cell;
+        line.appendChild(div);
+      });
+
+      container.appendChild(line);
+    }
   });
-
-  html += '</tbody></table>';
-  document.getElementById("schedule").innerHTML = html;
 }
 
 loadSchedule();
 </script>
+
+<style>
+#schedule {
+  max-width: 1000px;
+  margin: 2rem auto;
+  font-family: Arial, sans-serif;
+}
+
+.class-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.4rem;
+  padding: 0.8rem;
+  margin-top: 1rem;
+  border-radius: 10px;
+  color: #fff;
+}
+
+.class-title.male { background: #4c79f0; }   /* голубой */
+.class-title.female { background: #ff7eb3; } /* розовый */
+
+.schedule-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 4px;
+  margin: 4px 0;
+}
+
+.cell {
+  background: #f0f4ff;
+  padding: 6px;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+</style>
 
 
   </div>
