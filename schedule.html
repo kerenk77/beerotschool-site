@@ -130,18 +130,15 @@ async function loadSchedule() {
     const trimmed = row.map(c => c.trim());
     const nonEmpty = trimmed.filter(c => c !== "").length;
 
-    // --- строка-заголовок класса ---
+    // --- заголовок класса ---
     if (nonEmpty === 1 && trimmed[0] !== "") {
       const title = document.createElement("div");
       title.className = "class-title";
-
-      // Цвет по ключевым словам
       if (trimmed[0].toLowerCase().includes("девочки") || trimmed[0].toLowerCase().includes("мора")) {
         title.classList.add("female");
       } else {
         title.classList.add("male");
       }
-
       title.textContent = trimmed[0];
       container.appendChild(title);
     } 
@@ -152,6 +149,7 @@ async function loadSchedule() {
       trimmed.forEach(cell => {
         const div = document.createElement("div");
         div.className = "cell";
+        if (/^\d+$/.test(cell)) div.classList.add("bold-number");
         div.textContent = cell;
         line.appendChild(div);
       });
@@ -161,14 +159,13 @@ async function loadSchedule() {
     else if (nonEmpty > 0) {
       const line = document.createElement("div");
       line.className = "schedule-row";
-
       trimmed.forEach(cell => {
         const div = document.createElement("div");
         div.className = "cell";
+        if (/^\d+$/.test(cell)) div.classList.add("bold-number");
         div.textContent = cell;
         line.appendChild(div);
       });
-
       container.appendChild(line);
     }
   });
@@ -216,7 +213,13 @@ loadSchedule();
   background: #cfd8e3; /* бледно-серый-голубой */
   font-weight: bold;
 }
+
+/* числа жирные */
+.cell.bold-number {
+  font-weight: bold;
+}
 </style>
+
 
 
 </body>
