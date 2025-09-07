@@ -18,11 +18,51 @@ nav { position: relative; }
   .nav-links.active { display: flex; }
   .hamburger { display: flex; }
 }
+
+/* Новый баннер */
 .hero-banner {
-  width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  border-radius: 0; /* можно закруглить углы, если хотите */
+  position: relative;
+  margin: 2rem 0;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.15);
+  background-image: url('hero-banner.jpg'); /* путь к картинке */
+  background-size: cover;
+  background-position: center;
+  min-height: clamp(260px, 38vw, 520px); /* адаптивная высота */
 }
+
+/* Кнопка поверх баннера */
+.banner-cta {
+  position: absolute;
+  right: clamp(12px, 3vw, 28px);
+  bottom: clamp(12px, 3vw, 28px);
+  display: inline-block;
+  padding: .9rem 1.6rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  background: #ffd166; /* тёплый акцент */
+  color: #1f3d7a;      /* тёмно-синий текст */
+  box-shadow: 0 8px 20px rgba(0,0,0,.15);
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.banner-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0,0,0,.2);
+  background: #ffc642;
+}
+
+/* Мобильный вариант */
+@media (max-width: 768px) {
+  .hero-banner {
+    background-position: left center; /* фокусируем левую часть */
+  }
+}
+@media (max-width: 480px) {
+  .hero-banner {
+    background-image: url('hero-banner-mobile.jpg'); /* мобильная версия, если есть */
+    min-height: 360px;
+  }
+}
+
 
