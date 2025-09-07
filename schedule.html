@@ -130,13 +130,13 @@ async function loadSchedule() {
     const trimmed = row.map(c => c.trim());
     const nonEmpty = trimmed.filter(c => c !== "").length;
 
-    // --- Заголовок класса ---
+    // --- строка-заголовок класса ---
     if (nonEmpty === 1 && trimmed[0] !== "") {
       const title = document.createElement("div");
       title.className = "class-title";
 
-      // Цвет по ключевому слову
-      if (trimmed[0].toLowerCase().includes("мора")) {
+      // Цвет по ключевым словам
+      if (trimmed[0].toLowerCase().includes("девочки") || trimmed[0].toLowerCase().includes("мора")) {
         title.classList.add("female");
       } else {
         title.classList.add("male");
@@ -145,7 +145,19 @@ async function loadSchedule() {
       title.textContent = trimmed[0];
       container.appendChild(title);
     } 
-    // --- Обычная строка расписания ---
+    // --- строка "Время ..." ---
+    else if (trimmed[0] && trimmed[0].toLowerCase().startsWith("время")) {
+      const line = document.createElement("div");
+      line.className = "schedule-row time-header";
+      trimmed.forEach(cell => {
+        const div = document.createElement("div");
+        div.className = "cell";
+        div.textContent = cell;
+        line.appendChild(div);
+      });
+      container.appendChild(line);
+    }
+    // --- обычная строка расписания ---
     else if (nonEmpty > 0) {
       const line = document.createElement("div");
       line.className = "schedule-row";
@@ -199,7 +211,13 @@ loadSchedule();
   text-align: center;
   font-size: 0.95rem;
 }
+
+.time-header .cell {
+  background: #cfd8e3; /* бледно-серый-голубой */
+  font-weight: bold;
+}
 </style>
+
 
 </body>
 </html>
