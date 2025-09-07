@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Классы Zoom — Онлайн школа "Беерот Ицхак"</title> <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Классы Zoom — Онлайн школа "Беерот Ицхак"</title>
+<link rel="stylesheet" href="style.css">
 <style>
+  /* ========================== */
+  /*       ОБЩИЕ СТИЛИ         */
+  /* ========================== */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: #333;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #1f3d7a;
+    background: #f5f6fa;
   }
+  a { text-decoration: none; color: inherit; }
 
   .container {
     max-width: 1000px;
@@ -22,9 +28,12 @@
     box-shadow: 0 8px 32px rgba(0,0,0,0.1);
   }
 
-  h1 { color: #4a5568; margin-bottom: 1rem; }
-  p { color: #666; margin-bottom: 2rem; }
+  h1 { color: #1f3d7a; margin-bottom: 1rem; }
+  p { color: #4a5568; margin-bottom: 2rem; }
 
+  /* ========================== */
+  /*          СЕТКА ZOOM        */
+  /* ========================== */
   .zoom-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -32,7 +41,7 @@
   }
 
   .zoom-card {
-    background: #f9f9f9;
+    background: #ffffff;
     border-radius: 20px;
     padding: 1.5rem 1rem;
     box-shadow: 0 6px 20px rgba(0,0,0,0.08);
@@ -40,14 +49,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #333;
+    color: #1f3d7a;
     min-height: 180px;
     justify-content: space-between;
   }
-
   .zoom-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.15);
   }
 
   .zoom-card img {
@@ -55,20 +63,9 @@
     margin-bottom: 1rem;
   }
 
-  /* Цвета для ребе (мужские, более разные оттенки синего/бирюзового) */
-  .rebbe1 { background: linear-gradient(45deg, #0072ff, #00c6ff); }
-  .rebbe2 { background: linear-gradient(45deg, #0f2027, #2c5364); }
-  .rebbe3 { background: linear-gradient(45deg, #1a2980, #26d0ce); }
-  .rebbe4 { background: linear-gradient(45deg, #373b44, #4286f4); }
-  .rebbe5 { background: linear-gradient(45deg, #000046, #1cb5e0); }
-
-  /* Цвета для моры (женские, розовые/красные/фиолетовые) */
-  .mora1 { background: linear-gradient(45deg, #ff758c, #ff7eb3); }
-  .mora2 { background: linear-gradient(45deg, #ff9966, #ff5e62); }
-  .mora3 { background: linear-gradient(45deg, #f7971e, #ffd200); }
-  .mora4 { background: linear-gradient(45deg, #f953c6, #b91d73); }
-  .mora5 { background: linear-gradient(45deg, #e96443, #904e95); }
-
+  /* ========================== */
+  /*         КНОПКИ ZOOM        */
+  /* ========================== */
   .zoom-card a {
     text-decoration: none;
     color: #fff;
@@ -78,13 +75,28 @@
     transition: all 0.3s ease;
     display: inline-block;
   }
-
-  /* Подсветка при наведении */
   .zoom-card a:hover {
     opacity: 0.9;
     box-shadow: 0 0 15px rgba(255,255,255,0.8);
     transform: scale(1.05);
   }
+
+  /* ========================== */
+  /*   ГРАДИЕНТЫ ДЛЯ КНОПОК    */
+  /* ========================== */
+  /* Ребе - мужские, голубые/синие */
+  .rebbe1 { background: linear-gradient(45deg, #0072ff, #00c6ff); }
+  .rebbe2 { background: linear-gradient(45deg, #0f2027, #2c5364); }
+  .rebbe3 { background: linear-gradient(45deg, #1a2980, #26d0ce); }
+  .rebbe4 { background: linear-gradient(45deg, #373b44, #4286f4); }
+  .rebbe5 { background: linear-gradient(45deg, #000046, #1cb5e0); }
+
+  /* Мора - женские, голубые/бирюзовые (чтобы гармонировало с баннером) */
+  .mora1 { background: linear-gradient(45deg, #4dabf7, #63b3ed); }
+  .mora2 { background: linear-gradient(45deg, #60a5fa, #3b82f6); }
+  .mora3 { background: linear-gradient(45deg, #38bdf8, #06b6d4); }
+  .mora4 { background: linear-gradient(45deg, #22d3ee, #06b6d4); }
+  .mora5 { background: linear-gradient(45deg, #3b82f6, #2563eb); }
 
   @media (max-width: 500px) {
     .zoom-card a { padding: 0.5rem; font-size: 0.9rem; }
@@ -92,63 +104,65 @@
 </style>
 </head>
 <body>
-  <header id="siteHeader"></header> <script src="menu.js"></script>
-<main class="container">
-  <h1>Классы Zoom</h1>
-  <p>Выберите свой класс, чтобы войти в онлайн-занятие:</p>
+  <header id="siteHeader"></header>
+  <script src="menu.js"></script>
 
-  <div class="zoom-grid">
-    <div class="zoom-card">
-      <img src="zoom-icon.png" alt="Zoom">
-      <h3>Класс ребе Исроэля</h3>
-      <a class="rebbe1" href="https://us05web.zoom.us/j/9589267244?pwd=ZHpTeUVJUDh1SjFxVnFvU0dXWUhwZz09" target="_blank">Войти</a>
+  <main class="container">
+    <h1>Классы Zoom</h1>
+    <p>Выберите свой класс, чтобы войти в онлайн-занятие:</p>
+
+    <div class="zoom-grid">
+      <div class="zoom-card">
+        <img src="zoom-icon.png" alt="Zoom">
+        <h3>Класс ребе Исроэля</h3>
+        <a class="rebbe1" href="https://us05web.zoom.us/j/9589267244?pwd=ZHpTeUVJUDh1SjFxVnFvU0dXWUhwZz09" target="_blank">Войти</a>
+      </div>
+      <div class="zoom-card">
+        <img src="zoom-icon.png" alt="Zoom">
+        <h3>Класс моры Йохевед</h3>
+        <a class="mora1" href="https://us02web.zoom.us/j/6914341224?pwd=TSthTE03SFIwMTJMUittUUdNWnBQdz09" target="_blank">Войти</a>
+      </div>
+      <div class="zoom-card">
+        <img src="zoom-icon.png" alt="Zoom">
+        <h3>Класс ребе Овадьи</h3>
+        <a class="rebbe2" href="https://us04web.zoom.us/j/78966383836?pwd=WitRM2tpUjFvQ2FsL1RwSGk4UThHdz09" target="_blank">Войти</a>
+      </div>
+      <div class="zoom-card">
+        <img src="zoom-icon.png" alt="Zoom">
+        <h3>Класс ребе Арона</h3>
+        <a class="rebbe3" href="https://us04web.zoom.us/j/7453453508?pwd=b1B2RVg2Umx1RFJrS1VpekwrMzhtUT09" target="_blank">Войти</a>
+      </div>
+      <div class="zoom-card">
+        <img src="zoom-icon.png" alt="Zoom">
+        <h3>Класс мора Рина Лея</h3>
+        <a class="mora2" href="https://us04web.zoom.us/j/2513707042?pwd=UzZOL3FyL3pCakk1TVZNZURpbDVjZz09" target="_blank">Войти</a>
+      </div>
+      <div class="zoom-card">
+        <img src="zoom-icon.png" alt="Zoom">
+        <h3>Класс моры Керен</h3>
+        <a class="mora3" href="https://zoom.us/j/2020106658" target="_blank">Войти</a>
+      </div>
+      <div class="zoom-card">
+        <img src="zoom-icon.png" alt="Zoom">
+        <h3>Класс ребе Боруха</h3>
+        <a class="rebbe4" href="https://us04web.zoom.us/j/2996681036?pwd=aG1PeHZCVFNvd2NpSnZ4T0o1d0J1dz09" target="_blank">Войти</a>
+      </div>
+      <div class="zoom-card">
+        <img src="zoom-icon.png" alt="Zoom">
+        <h3>Класс ребе Элиша</h3>
+        <a class="rebbe5" href="https://us06web.zoom.us/j/87356492802?pwd=ata6s6IaiEOtnSvtUHdJ5j5TYvhwco.1" target="_blank">Войти</a>
+      </div>
+      <div class="zoom-card">
+        <img src="zoom-icon.png" alt="Zoom">
+        <h3>Класс моры Рут</h3>
+        <a class="mora4" href="https://us04web.zoom.us/j/5163659571?pwd=R2p2ZnNmRGlvTWFSWmE2V0U5eDlkQT09" target="_blank">Войти</a>
+      </div>
+      <div class="zoom-card">
+        <img src="zoom-icon.png" alt="Zoom">
+        <h3>Класс моры Кейлы</h3>
+        <a class="mora5" href="https://us04web.zoom.us/j/2637282809?pwd=NnNsZ2szZkpFY0lkV2xoZmNPbnpRZz09" target="_blank">Войти</a>
+      </div>
     </div>
-    <div class="zoom-card">
-      <img src="zoom-icon.png" alt="Zoom">
-      <h3>Класс моры Йохевед</h3>
-      <a class="mora1" href="https://us02web.zoom.us/j/6914341224?pwd=TSthTE03SFIwMTJMUittUUdNWnBQdz09" target="_blank">Войти</a>
-    </div>
-    <div class="zoom-card">
-      <img src="zoom-icon.png" alt="Zoom">
-      <h3>Класс ребе Овадьи</h3>
-      <a class="rebbe2" href="https://us04web.zoom.us/j/78966383836?pwd=WitRM2tpUjFvQ2FsL1RwSGk4UThHdz09" target="_blank">Войти</a>
-    </div>
-    <div class="zoom-card">
-      <img src="zoom-icon.png" alt="Zoom">
-      <h3>Класс ребе Арона</h3>
-      <a class="rebbe3" href="https://us04web.zoom.us/j/7453453508?pwd=b1B2RVg2Umx1RFJrS1VpekwrMzhtUT09" target="_blank">Войти</a>
-    </div>
-    <div class="zoom-card">
-      <img src="zoom-icon.png" alt="Zoom">
-      <h3>Класс мора Рина Лея</h3>
-      <a class="mora2" href="https://us04web.zoom.us/j/2513707042?pwd=UzZOL3FyL3pCakk1TVZNZURpbDVjZz09" target="_blank">Войти</a>
-    </div>
-    <div class="zoom-card">
-      <img src="zoom-icon.png" alt="Zoom">
-      <h3>Класс моры Керен</h3>
-      <a class="mora3" href="https://zoom.us/j/2020106658" target="_blank">Войти</a>
-    </div>
-    <div class="zoom-card">
-      <img src="zoom-icon.png" alt="Zoom">
-      <h3>Класс ребе Боруха</h3>
-      <a class="rebbe4" href="https://us04web.zoom.us/j/2996681036?pwd=aG1PeHZCVFNvd2NpSnZ4T0o1d0J1dz09" target="_blank">Войти</a>
-    </div>
-    <div class="zoom-card">
-      <img src="zoom-icon.png" alt="Zoom">
-      <h3>Класс ребе Элиша</h3>
-      <a class="rebbe5" href="https://us06web.zoom.us/j/87356492802?pwd=ata6s6IaiEOtnSvtUHdJ5j5TYvhwco.1" target="_blank">Войти</a>
-    </div>
-    <div class="zoom-card">
-      <img src="zoom-icon.png" alt="Zoom">
-      <h3>Класс моры Рут</h3>
-      <a class="mora4" href="https://us04web.zoom.us/j/5163659571?pwd=R2p2ZnNmRGlvTWFSWmE2V0U5eDlkQT09" target="_blank">Войти</a>
-    </div>
-    <div class="zoom-card">
-      <img src="zoom-icon.png" alt="Zoom">
-      <h3>Класс моры Кейлы</h3>
-      <a class="mora5" href="https://us04web.zoom.us/j/2637282809?pwd=NnNsZ2szZkpFY0lkV2xoZmNPbnpRZz09" target="_blank">Войти</a>
-    </div>
-  </div>
-</main>
+  </main>
 </body>
 </html>
