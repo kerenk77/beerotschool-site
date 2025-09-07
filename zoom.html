@@ -6,6 +6,25 @@
 <title>Классы Zoom — Онлайн школа "Беерот Ицхак"</title>
 <link rel="stylesheet" href="style.css">
 <style>
+/* Центральный контейнер */
+.container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 2rem;
+  text-align: center;
+  background: rgba(255,255,255,0.95);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+/* Сетка карточек */
+.zoom-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  justify-items: center;
+}
+
 /* Карточки Zoom */
 .zoom-card {
   background: #ffffff;
@@ -23,17 +42,8 @@
   transform: translateY(-5px);
   box-shadow: 0 10px 28px rgba(0,0,0,0.15);
 }
-
-.zoom-card img {
-  width: 50px;
-  margin-bottom: 1rem;
-}
-.zoom-card h3 {
-  color: #1f3d7a;
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  text-align: center;
-}
+.zoom-card img { width: 50px; margin-bottom: 1rem; }
+.zoom-card h3 { color: #1f3d7a; font-size: 1.1rem; margin-bottom: 1rem; text-align: center; }
 
 /* Градиенты кнопок */
 .rebbe1 { background: linear-gradient(45deg, #0077ff, #00c6ff); }
@@ -63,13 +73,6 @@
 .zoom-card a:hover {
   transform: scale(1.08);
   box-shadow: 0 0 15px rgba(255,255,255,0.8), 0 0 25px rgba(0,200,255,0.5);
-}
-
-/* Сетка карточек */
-.zoom-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
 }
 
 /* Адаптив */
