@@ -141,12 +141,12 @@ nav {
   background: #ffc642; 
 }
 
-@media (max-width: 480px) { 
+/*@media (max-width: 480px) { 
   .hero-banner { 
     background-image: url('hero-banner-mobile.jpg'); 
     min-height: 400px; 
   } 
-}
+}*/
 
 /* ========================== */
 /*       СТИЛИ СЕКЦИЙ        */
