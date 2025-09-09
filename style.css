@@ -122,7 +122,7 @@ nav {
 .banner-cta { 
   position: absolute; 
   right: 20%; 
-  bottom: 20%; 
+  bottom: 5%; 
   transform: translateX(80%); /* центрируем кнопку */ 
   display: inline-block; 
   padding: 0.9rem 1.6rem; 
@@ -136,7 +136,7 @@ nav {
 }
 
 .banner-cta:hover { 
-  transform: translateX(50%) translateY(-2px); 
+  transform: translateX(80%) translateY(-2px); 
   box-shadow: 0 12px 28px rgba(0,0,0,.2); 
   background: #ffc642; 
 }
