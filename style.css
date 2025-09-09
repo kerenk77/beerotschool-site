@@ -99,18 +99,14 @@ nav { position: relative; }
 /*          HERO BANNER       */
 /* ========================== */
 
-/* ========================== */
-/*          HERO BANNER       */
-/* ========================== */
-
 .hero-banner {
   position: relative;
   width: 100%;
   height: 100vh;
-  text-align: center;
   overflow: hidden;
-  margin: 0;
-  border-radius: 0;
+  margin: 0; /* нет отступов сверху и снизу */
+  border-radius: 0; /* без закруглений */
+  background-color: #6ba8d4; /* фон на время загрузки картинки */
 }
 
 .hero-banner img {
@@ -119,7 +115,7 @@ nav { position: relative; }
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* сохраняем пропорции, растягиваем по высоте и ширине */
   z-index: 1;
 }
 
@@ -128,10 +124,10 @@ nav { position: relative; }
   bottom: 5%;
   right: 5%;
   display: inline-block;
-  padding: 1.2rem 2rem;
+  padding: clamp(0.8rem, 1.5vw, 1.2rem) clamp(1.4rem, 3vw, 2rem);
+  font-size: clamp(0.95rem, 2vw, 1.2rem);
   border-radius: 999px;
   font-weight: 700;
-  font-size: 1.2rem;
   background: #ffd166;
   color: #1f3d7a;
   box-shadow: 0 8px 20px rgba(0,0,0,.15);
@@ -145,60 +141,44 @@ nav { position: relative; }
   background: #ffc642;
 }
 
-/* Медиазапросы для адаптивности */
+/* ========================== */
+/*       Адаптивность         */
+/* ========================== */
+
 @media (max-width: 1024px) {
-  .hero-banner {
-    height: 80vh;
-  }
-  .banner-cta {
-    padding: 1rem 1.8rem;
-    font-size: 1.1rem;
-    bottom: 5%;
-    right: 5%;
-  }
+  .hero-banner { height: 80vh; }
 }
 
 @media (max-width: 768px) {
-  .hero-banner {
-    height: 70vh;
-  }
-  .banner-cta {
-    padding: 0.9rem 1.6rem;
-    font-size: 1rem;
-    bottom: 5%;
-    right: 5%;
-  }
+  .hero-banner { height: 70vh; }
 }
 
 @media (max-width: 480px) {
   .hero-banner {
     height: 60vh;
+    min-height: 400px;
+    background-image: url('hero-banner-mobile.jpg'); /* отдельный файл для мобильных */
   }
   .banner-cta {
-    padding: 0.8rem 1.4rem;
-    font-size: 0.95rem;
     bottom: 5%;
     right: 5%;
-  }
-}
-
-
-@media (max-width: 480px) {
-  .hero-banner {
-    background-image: url('hero-banner-mobile.jpg');
-    min-height: 400px;
+    padding: 0.8rem 1.4rem;
+    font-size: 0.95rem;
   }
 }
 
 /* ========================== */
-/*       СТИЛИ СЕКЦИЙ        */
+/*     Отступы между секциями  */
 /* ========================== */
+.hero-banner + section {
+  margin-top: 0; /* секция сразу под баннером */
+}
 
 section {
-  margin: 4rem 0;
+  margin: 0; /* удаляем стандартные пробелы между всеми секциями */
   padding: 2rem;
   border-radius: 16px;
-  background: #f0f4ff; /* светлый голубой фон */
+  background: #f0f4ff;
   box-shadow: 0 6px 25px rgba(0,0,0,0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -208,11 +188,7 @@ section:hover {
   box-shadow: 0 12px 28px rgba(0,0,0,0.1);
 }
 
-section h2 {
-  text-align: center;
-  font-size: clamp(1.8rem, 2.5vw, 2.5rem);
-  margin-bottom: 2rem;
-}
+
 
 /* --- Видео --- */
 .video-section iframe {
