@@ -145,7 +145,7 @@ nav {
 }
 
 /* Медиазапрос для мобильных */
-@media (max-width: 330px) {
+@media (max-width: 180px) {
   .banner-cta {
     padding: 0.6rem 1rem;
     font-size: 0.65rem;
