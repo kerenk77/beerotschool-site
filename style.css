@@ -1,1 +1,414 @@
-/* ========================== */ /* ОСНОВНЫЕ СТИЛИ */ /* ========================== */ * { box-sizing: border-box; margin: 0; padding: 0; } body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: ##6ba8d4; /* светлый голубой фон всего сайта */ color: #1f3d7a; /* основной темно-синий текст */ line-height: 1.6; } .banner img { display: block; max-width: 100%; height: auto; /* сохраняем пропорции, ничего не обрезается */ margin: 0 auto; } a { text-decoration: none; color: inherit; } /* ========================== */ /* HEADER / МЕНЮ */ /* ========================== */ header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1); position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 1rem; } .logo img { height: 50px; } nav { position: relative; } .nav-links { display: flex; list-style: none; gap: 2rem; } .nav-links a { text-decoration: none; color: #4a5568; font-weight: 500; transition: all 0.3s ease; padding: 0.5rem 1rem; border-radius: 8px; } .nav-links a:hover { background: #4c79f0; /* голубой акцент */ color: white; transform: translateY(-2px); } .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; } .hamburger div { width: 25px; height: 3px; background: #333; border-radius: 2px; } @media (max-width: 768px) { .nav-links { position: absolute; top: 60px; right: 0; background: #f0f4ff; /* гармонирующий светлый фон */ flex-direction: column; width: 200px; padding: 1rem; box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: none; } .nav-links.active { display: flex; } .hamburger { display: flex; } } /* ========================== */ /* HERO BANNER */ /* ========================== */ .hero-banner { position: relative; text-align: center; overflow: hidden; margin: 0 auto 2rem; /* убрали верхний отступ */ border-radius: 0 0 20px 20px; /* закругления только снизу */ box-shadow: 0 8px 32px rgba(0,0,0,.15); } .hero-banner img { display: block; width: 100%; height: auto; } .banner-cta { position: absolute; right: 50%; bottom: 15%; transform: translateX(80%); /* центрируем кнопку */ display: inline-block; padding: .9rem 1.6rem; border-radius: 999px; text-decoration: none; font-weight: 700; background: #ffd166; color: #1f3d7a; box-shadow: 0 8px 20px rgba(0,0,0,.15); transition: transform .2s ease, box-shadow .2s ease, background .2s ease; } .banner-cta:hover { transform: translateX(50%) translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,.2); background: #ffc642; } @media (max-width: 480px) { .hero-banner { background-image: url('hero-banner-mobile.jpg'); min-height: 400px; } } /* ========================== */ /* СТИЛИ СЕКЦИЙ */ /* ========================== */ section { margin: 4rem 0; padding: 2rem; border-radius: 16px; background: #f0f4ff; /* светлый голубой фон */ box-shadow: 0 6px 25px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; } section:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,0,0,0.1); } section h2 { text-align: center; font-size: clamp(1.8rem, 2.5vw, 2.5rem); margin-bottom: 2rem; } /* --- Видео --- */ .video-section iframe { width: 100%; max-width: 800px; height: 450px; display: block; margin: 0 auto; border-radius: 16px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); } /* --- Баннер пожертвований --- */ .donate-banner { text-align: center; font-size: 1.2rem; font-weight: 500; background: #4c79f0; /* голубой акцент */ color: #fff; padding: 2rem; border-radius: 16px; } .donate-banner a { display: inline-block; margin-top: 1rem; padding: 0.8rem 1.6rem; border-radius: 999px; background: #ffd166; /* желтая кнопка на голубом фоне */ color: #1f3d7a; font-weight: 700; text-decoration: none; transition: all 0.3s ease; } .donate-banner a:hover { background: #ffc642; transform: translateY(-2px); } /* --- Преимущества --- */ .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; } .feature-card { text-align: center; padding: 2rem; border-radius: 16px; background: #e6edff; /* светлый голубой для карточек */ box-shadow: 0 6px 20px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; } .feature-card:hover { transform: translateY(-5px); box-shadow: 0 12px 28px rgba(0,0,0,0.1); } .feature-icon { font-size: 2rem; margin-bottom: 1rem; color: #4c79f0; /* синий акцент */ } /* --- Инфо-блок --- */ .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; } .info-item { text-align: center; padding: 1.5rem; background: #dce7ff; /* светлый голубой */ border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; } .info-item:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); } /* --- Дисциплины --- */ .subjects-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; } .subject-tag { background: #4c79f0; /* синий акцент */ color: #fff; padding: 0.5rem 1rem; border-radius: 999px; font-weight: 500; transition: transform 0.2s ease; } .subject-tag:hover { transform: scale(1.05); } /* --- Статистика --- */ .stats-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-top: 2rem; } .stat-item { text-align: center; } .stat-number { font-size: 2.5rem; font-weight: 700; color: #1f3d7a; } .stat-label { margin-top: 0.5rem; color: #4a5568; } .achievement { text-align: center; margin-top: 2rem; font-weight: 500; } /* --- Примеры уроков --- */ .lesson-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; } .lesson-card { border-radius: 16px; overflow: hidden; background: #e6edff; /* светлый голубой фон карточек */ box-shadow: 0 6px 20px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; } .lesson-card:hover { transform: translateY(-5px); box-shadow: 0 12px 28px rgba(0,0,0,0.1); } .lesson-thumbnail iframe { width: 100%; height: 180px; } .lesson-content { padding: 1rem 1.5rem; } .lesson-category { font-size: 0.9rem; font-weight: 600; color: #4c79f0; /* синий акцент */ margin-bottom: 0.5rem; } .lesson-title { font-size: 1.2rem; margin-bottom: 0.5rem; color: #1f3d7a; } .lesson-description { font-size: 0.95rem; color: #4a5568; } /* --- YouTube канал --- */ .youtube-channel { text-align: center; margin-top: 2rem; } .youtube-channel a { display: inline-block; margin-top: 0.5rem; padding: 0.7rem 1.4rem; background: #4c79f0; /* голубая кнопка */ color: #fff; border-radius: 999px; font-weight: 600; transition: 0.3s; } .youtube-channel a:hover { transform: translateY(-2px); background: #3b65d0; /* чуть темнее при hover */ } /* --- Футер --- */ footer { text-align: center; padding: 2rem 1rem; background: #1f3d7a; color: #fff; } footer .contacts { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-top: 1rem; } footer a { color: #ffd166; text-decoration: none; } footer a:hover { text-decoration: underline; } /* --- Адаптив --- */ @media (max-width: 768px) { .video-section iframe { height: 300px; } .stats-container { flex-direction: column; } } @media (max-width: 480px) { .video-section iframe { height: 220px; }
+/* ========================== */
+/*       ОСНОВНЫЕ СТИЛИ       */
+/* ========================== */
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+body { 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+  background: #6ba8d4; /* светлый голубой фон всего сайта */ 
+  color: #1f3d7a; /* основной темно-синий текст */ 
+  line-height: 1.6; 
+}
+
+.banner img { 
+  display: block; 
+  max-width: 100%; 
+  height: auto; /* сохраняем пропорции, ничего не обрезается */ 
+  margin: 0 auto; 
+}
+
+a { 
+  text-decoration: none; 
+  color: inherit; 
+}
+
+/* ========================== */
+/*       HEADER / МЕНЮ        */
+/* ========================== */
+header { 
+  background: rgba(255, 255, 255, 0.95); 
+  backdrop-filter: blur(10px); 
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1); 
+  position: sticky; 
+  top: 0; 
+  z-index: 100; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 0.5rem 1rem; 
+}
+
+.logo img { 
+  height: 50px; 
+}
+
+nav { 
+  position: relative; 
+}
+
+.nav-links { 
+  display: flex; 
+  list-style: none; 
+  gap: 2rem; 
+}
+
+.nav-links a { 
+  text-decoration: none; 
+  color: #4a5568; 
+  font-weight: 500; 
+  transition: all 0.3s ease; 
+  padding: 0.5rem 1rem; 
+  border-radius: 8px; 
+}
+
+.nav-links a:hover { 
+  background: #4c79f0; /* голубой акцент */ 
+  color: white; 
+  transform: translateY(-2px); 
+}
+
+.hamburger { 
+  display: none; 
+  flex-direction: column; 
+  cursor: pointer; 
+  gap: 5px; 
+}
+
+.hamburger div { 
+  width: 25px; 
+  height: 3px; 
+  background: #333; 
+  border-radius: 2px; 
+}
+
+@media (max-width: 768px) { 
+  .nav-links { 
+    position: absolute; 
+    top: 60px; 
+    right: 0; 
+    background: #f0f4ff; /* гармонирующий светлый фон */ 
+    flex-direction: column; 
+    width: 200px; 
+    padding: 1rem; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
+    display: none; 
+  } 
+  .nav-links.active { display: flex; } 
+  .hamburger { display: flex; } 
+}
+
+/* ========================== */
+/*         HERO BANNER        */
+/* ========================== */
+.hero-banner { 
+  position: relative; 
+  text-align: center; 
+  overflow: hidden; 
+  margin: 0 auto 2rem; /* убрали верхний отступ */ 
+  border-radius: 0 0 20px 20px; /* закругления только снизу */ 
+  box-shadow: 0 8px 32px rgba(0,0,0,.15); 
+}
+
+.hero-banner img { 
+  display: block; 
+  width: 100%; 
+  height: auto; 
+}
+
+.banner-cta { 
+  position: absolute; 
+  right: 50%; 
+  bottom: 15%; 
+  transform: translateX(80%); /* центрируем кнопку */ 
+  display: inline-block; 
+  padding: 0.9rem 1.6rem; 
+  border-radius: 999px; 
+  text-decoration: none; 
+  font-weight: 700; 
+  background: #ffd166; 
+  color: #1f3d7a; 
+  box-shadow: 0 8px 20px rgba(0,0,0,.15); 
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease; 
+}
+
+.banner-cta:hover { 
+  transform: translateX(50%) translateY(-2px); 
+  box-shadow: 0 12px 28px rgba(0,0,0,.2); 
+  background: #ffc642; 
+}
+
+@media (max-width: 480px) { 
+  .hero-banner { 
+    background-image: url('hero-banner-mobile.jpg'); 
+    min-height: 400px; 
+  } 
+}
+
+/* ========================== */
+/*       СТИЛИ СЕКЦИЙ        */
+/* ========================== */
+section { 
+  margin: 4rem 0; 
+  padding: 2rem; 
+  border-radius: 16px; 
+  background: #f0f4ff; /* светлый голубой фон */ 
+  box-shadow: 0 6px 25px rgba(0,0,0,0.05); 
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+section:hover { 
+  transform: translateY(-3px); 
+  box-shadow: 0 12px 28px rgba(0,0,0,0.1); 
+}
+
+section h2 { 
+  text-align: center; 
+  font-size: clamp(1.8rem, 2.5vw, 2.5rem); 
+  margin-bottom: 2rem; 
+}
+
+/* --- Видео --- */
+.video-section iframe { 
+  width: 100%; 
+  max-width: 800px; 
+  height: 450px; 
+  display: block; 
+  margin: 0 auto; 
+  border-radius: 16px; 
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1); 
+}
+
+/* --- Баннер пожертвований --- */
+.donate-banner { 
+  text-align: center; 
+  font-size: 1.2rem; 
+  font-weight: 500; 
+  background: #4c79f0; /* голубой акцент */ 
+  color: #fff; 
+  padding: 2rem; 
+  border-radius: 16px; 
+}
+
+.donate-banner a { 
+  display: inline-block; 
+  margin-top: 1rem; 
+  padding: 0.8rem 1.6rem; 
+  border-radius: 999px; 
+  background: #ffd166; /* желтая кнопка на голубом фоне */ 
+  color: #1f3d7a; 
+  font-weight: 700; 
+  text-decoration: none; 
+  transition: all 0.3s ease; 
+}
+
+.donate-banner a:hover { 
+  background: #ffc642; 
+  transform: translateY(-2px); 
+}
+
+/* --- Преимущества --- */
+.features { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+  gap: 2rem; 
+}
+
+.feature-card { 
+  text-align: center; 
+  padding: 2rem; 
+  border-radius: 16px; 
+  background: #e6edff; /* светлый голубой для карточек */ 
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05); 
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.feature-card:hover { 
+  transform: translateY(-5px); 
+  box-shadow: 0 12px 28px rgba(0,0,0,0.1); 
+}
+
+.feature-icon { 
+  font-size: 2rem; 
+  margin-bottom: 1rem; 
+  color: #4c79f0; /* синий акцент */ 
+}
+
+/* --- Инфо-блок --- */
+.info-grid { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+  gap: 1.5rem; 
+}
+
+.info-item { 
+  text-align: center; 
+  padding: 1.5rem; 
+  background: #dce7ff; /* светлый голубой */ 
+  border-radius: 12px; 
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.info-item:hover { 
+  transform: translateY(-3px); 
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1); 
+}
+
+/* --- Дисциплины --- */
+.subjects-grid { 
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: center; 
+  gap: 10px; 
+}
+
+.subject-tag { 
+  background: #4c79f0; /* синий акцент */ 
+  color: #fff; 
+  padding: 0.5rem 1rem; 
+  border-radius: 999px; 
+  font-weight: 500; 
+  transition: transform 0.2s ease; 
+}
+
+.subject-tag:hover { 
+  transform: scale(1.05); 
+}
+
+/* --- Статистика --- */
+.stats-container { 
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: center; 
+  gap: 2rem; 
+  margin-top: 2rem; 
+}
+
+.stat-item { 
+  text-align: center; 
+}
+
+.stat-number { 
+  font-size: 2.5rem; 
+  font-weight: 700; 
+  color: #1f3d7a; 
+}
+
+.stat-label { 
+  margin-top: 0.5rem; 
+  color: #4a5568; 
+}
+
+.achievement { 
+  text-align: center; 
+  margin-top: 2rem; 
+  font-weight: 500; 
+}
+
+/* --- Примеры уроков --- */
+.lesson-grid { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+  gap: 2rem; 
+}
+
+.lesson-card { 
+  border-radius: 16px; 
+  overflow: hidden; 
+  background: #e6edff; /* светлый голубой фон карточек */ 
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05); 
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.lesson-card:hover { 
+  transform: translateY(-5px); 
+  box-shadow: 0 12px 28px rgba(0,0,0,0.1); 
+}
+
+.lesson-thumbnail iframe { 
+  width: 100%; 
+  height: 180px; 
+}
+
+.lesson-content { 
+  padding: 1rem 1.5rem; 
+}
+
+.lesson-category { 
+  font-size: 0.9rem; 
+  font-weight: 600; 
+  color: #4c79f0; /* синий акцент */ 
+  margin-bottom: 0.5rem; 
+}
+
+.lesson-title { 
+  font-size: 1.2rem; 
+  margin-bottom: 0.5rem; 
+  color: #1f3d7a; 
+}
+
+.lesson-description { 
+  font-size: 0.95rem; 
+  color: #4a5568; 
+}
+
+/* --- YouTube канал --- */
+.youtube-channel { 
+  text-align: center; 
+  margin-top: 2rem; 
+}
+
+.youtube-channel a { 
+  display: inline-block; 
+  margin-top: 0.5rem; 
+  padding: 0.7rem 1.4rem; 
+  background: #4c79f0; /* голубая кнопка */ 
+  color: #fff; 
+  border-radius: 999px; 
+  font-weight: 600; 
+  transition: 0.3s; 
+}
+
+.youtube-channel a:hover { 
+  transform: translateY(-2px); 
+  background: #3b65d0; /* чуть темнее при hover */ 
+}
+
+/* --- Футер --- */
+footer { 
+  text-align: center; 
+  padding: 2rem 1rem; 
+  background: #1f3d7a; 
+  color: #fff; 
+}
+
+footer .contacts { 
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: center; 
+  gap: 2rem; 
+  margin-top: 1rem; 
+}
+
+footer a { 
+  color: #ffd166; 
+  text-decoration: none; 
+}
+
+footer a:hover { 
+  text-decoration: underline; 
+}
+
+/* --- Адаптив --- */
+@media (max-width: 768px) { 
+  .video-section iframe { height: 300px; } 
+  .stats-container { flex-direction: column; } 
+}
+
+@media (max-width: 480px) { 
+  .video-section iframe { height: 220px; } 
+}
