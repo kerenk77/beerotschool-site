@@ -126,38 +126,24 @@ nav {
   bottom: 8.5%; 
   transform: translateX(80%); 
   display: inline-block; 
-  padding: 0.9rem 1.6rem; 
+  padding: clamp(0.5rem, 2vw, 0.9rem) clamp(1rem, 4vw, 1.6rem); 
   border-radius: 999px; 
   text-decoration: none; 
   font-weight: 700; 
+  font-size: clamp(0.8rem, 2.5vw, 1.2rem);
   background: #ffd166; 
   color: #1f3d7a; 
   box-shadow: 0 8px 20px rgba(0,0,0,.15); 
   transition: transform .2s ease, box-shadow .2s ease, background .2s ease; 
 }
 
-/* Медиазапрос для планшетов */
-@media (max-width: 768px) {
-  .banner-cta {
-    padding: 0.7rem 1.3rem; /* чуть меньше */
-    font-size: 0.9rem;       /* уменьшаем текст */
-  }
-}
-
-/* Медиазапрос для мобильных */
-@media (max-width: 180px) {
-  .banner-cta {
-    padding: 0.6rem 1rem;
-    font-size: 0.65rem;
-  }
-}
-
-
 .banner-cta:hover { 
   transform: translateX(80%) translateY(-2px); 
   box-shadow: 0 12px 28px rgba(0,0,0,.2); 
   background: #ffc642; 
 }
+
+
 
 /*@media (max-width: 480px) { 
   .hero-banner { 
