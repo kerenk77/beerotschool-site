@@ -81,7 +81,7 @@
     .class-title.male { background: #4c79f0; }
     .class-title.female { background: #ff7eb3; }
 
-    .schedule-row {
+   /* .schedule-row {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
       gap: 4px;
@@ -99,7 +99,39 @@
     .time-header .cell {
       background: #cfd8e3;
       font-weight: bold;
-    }
+    }*/
+    /* === расписание === */
+.schedule-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* уменьшили минимальную ширину */
+  gap: 4px;
+  margin: 2px 0;
+}
+
+.cell {
+  background: #f0f4ff;
+  padding: clamp(4px, 1vw, 8px); /* адаптивный padding */
+  border-radius: 6px;
+  text-align: center;
+  font-size: clamp(0.7rem, 2vw, 0.95rem); /* адаптивный размер текста */
+}
+
+.time-header .cell {
+  background: #cfd8e3;
+  font-weight: bold;
+}
+
+/* адаптив для мобильных экранов */
+@media (max-width: 600px) {
+  .schedule-row {
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); /* еще меньше для узких экранов */
+  }
+  .cell {
+    padding: clamp(3px, 2vw, 6px);
+    font-size: clamp(0.65rem, 3vw, 0.85rem);
+  }
+}
+
 
     .cell.bold-number { font-weight: bold; }
 
