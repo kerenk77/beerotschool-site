@@ -14,6 +14,13 @@ body {
   color: #1f3d7a; /* основной темно-синий текст */
   line-height: 1.6;
 }
+.banner img {
+  display: block;
+  max-width: 100%;
+  height: auto; /* сохраняем пропорции, ничего не обрезается */
+  margin: 0 auto;
+}
+
 
 a {
   text-decoration: none;
