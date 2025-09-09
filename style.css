@@ -164,14 +164,12 @@ section h2 {
   margin-bottom: 2rem;
 }
 
-/* ========================== */
-/*       Дополнительные стили  */
-/* ========================== */
-
+/* Видео */
 .video-section iframe { width: 100%; height: 450px; border-radius: 16px; display: block; margin: 0 auto; }
 @media (max-width: 768px) { .video-section iframe { height: 300px; } }
 @media (max-width: 480px) { .video-section iframe { height: 220px; } }
 
+/* Преимущества, инфо, уроки */
 .features, .info-grid, .lesson-grid {
   display: grid;
   gap: 2rem;
@@ -180,12 +178,95 @@ section h2 {
 .info-grid { grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); }
 .lesson-grid { grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); }
 
+/* Дисциплины и статистика */
 .subjects-grid, .stats-container { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
 .stats-container { margin-top: 2rem; }
 @media (max-width: 768px) { .stats-container { flex-direction: column; } }
 
+/* Кнопки и теги */
 .subject-tag, .donate-banner a, .youtube-channel a, .banner-cta {
   border-radius: 999px;
   transition: 0.3s;
 }
+
+/* ========================== */
+/*       Баннер пожертвований  */
+/* ========================== */
+
+.donate-banner {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+  background: #4c79f0;
+  color: #fff;
+  padding: 2rem;
+}
+
+.donate-banner a {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.8rem 1.6rem;
+  background: #ffd166;
+  color: #1f3d7a;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.donate-banner a:hover {
+  background: #ffc642;
+  transform: translateY(-2px);
+}
+
+/* ========================== */
+/*       YouTube канал        */
+/* ========================== */
+
+.youtube-channel {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.youtube-channel h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.youtube-channel p { margin-bottom: 1rem; color: #4a5568; }
+
+.youtube-channel a {
+  display: inline-block;
+  padding: 0.7rem 1.4rem;
+  background: #4c79f0;
+  color: #fff;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.youtube-channel a:hover {
+  background: #3b65d0;
+  transform: translateY(-2px);
+}
+
+/* ========================== */
+/*          Футер             */
+/* ========================== */
+
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: #1f3d7a;
+  color: #fff;
+}
+
+footer .contacts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+footer a {
+  color: #ffd166;
+  text-decoration: none;
+}
+
+footer a:hover { text-decoration: underline; }
 
