@@ -103,22 +103,22 @@ nav { position: relative; }
   position: relative;
   text-align: center;
   overflow: hidden;
-  margin: 2rem 0;
-  border-radius: 20px;
+  margin: 0 auto 2rem; /* убрали верхний отступ */
+  border-radius: 0 0 20px 20px; /* закругления только снизу */
   box-shadow: 0 8px 32px rgba(0,0,0,.15);
 }
 
 .hero-banner img {
   display: block;
   width: 100%;
-  height: auto; /* ✅ гарантирует, что не обрежется */
-  border-radius: 20px;
+  height: auto;
 }
 
 .banner-cta {
   position: absolute;
-  right: clamp(12px, 3vw, 28px);
-  bottom: clamp(12px, 3vw, 28px);
+  right: 50%;
+  bottom: 15%;
+  transform: translateX(80%); /* центрируем кнопку */
   display: inline-block;
   padding: .9rem 1.6rem;
   border-radius: 999px;
@@ -131,7 +131,7 @@ nav { position: relative; }
 }
 
 .banner-cta:hover {
-  transform: translateY(-2px);
+  transform: translateX(50%) translateY(-2px);
   box-shadow: 0 12px 28px rgba(0,0,0,.2);
   background: #ffc642;
 }
