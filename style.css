@@ -101,13 +101,18 @@ nav { position: relative; }
 
 .hero-banner {
   position: relative;
+  text-align: center;
+  overflow: hidden;
   margin: 2rem 0;
   border-radius: 20px;
   box-shadow: 0 8px 32px rgba(0,0,0,.15);
-  background-image: url('hero-banner.jpg');
-  background-size: cover;
-  background-position: center;
-  min-height: clamp(260px, 38vw, 520px);
+}
+
+.hero-banner img {
+  display: block;
+  width: 100%;
+  height: auto; /* ✅ гарантирует, что не обрежется */
+  border-radius: 20px;
 }
 
 .banner-cta {
@@ -119,7 +124,7 @@ nav { position: relative; }
   border-radius: 999px;
   text-decoration: none;
   font-weight: 700;
-  background: #ffd166; /* желтая кнопка */
+  background: #ffd166;
   color: #1f3d7a;
   box-shadow: 0 8px 20px rgba(0,0,0,.15);
   transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
@@ -131,11 +136,6 @@ nav { position: relative; }
   background: #ffc642;
 }
 
-@media (max-width: 768px) {
-  .hero-banner {
-    background-position: top center;
-  }
-}
 @media (max-width: 480px) {
   .hero-banner {
     background-image: url('hero-banner-mobile.jpg');
