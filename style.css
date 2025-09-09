@@ -34,7 +34,7 @@ a {
 header { 
   background: rgba(255, 255, 255, 0.95); 
   backdrop-filter: blur(10px); 
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1); 
+ /* box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1); */
   position: sticky; top: 0; z-index: 100; 
   display: flex; justify-content: space-between; align-items: center; 
   padding: 0.5rem 1rem;
@@ -88,7 +88,7 @@ nav { position: relative; }
     flex-direction: column;
     width: 200px;
     padding: 1rem;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+   box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
     display: none;
   }
   .nav-links.active { display: flex; }
@@ -106,9 +106,11 @@ nav { position: relative; }
 .hero-banner {
   position: relative;
   width: 100%;
-  height: 100vh; /* высота баннера = высота окна браузера */
+  height: 100vh; /* высота = высота окна */
   text-align: center;
   overflow: hidden;
+  margin: 0; /* убираем отступы */
+  border-radius: 0; /* убираем закругления */
 }
 
 .hero-banner img {
@@ -116,10 +118,11 @@ nav { position: relative; }
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%; /* растягиваем на всю высоту */
-  object-fit: cover; /* сохраняем пропорции и обрезаем лишнее */
+  height: 100%;
+  object-fit: cover;
   z-index: 1;
 }
+
 
 .banner-cta {
   position: absolute;
