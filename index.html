@@ -3,26 +3,122 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Онлайн школа Беерот Ицхак</title>
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="preload" as="image" href="hero-banner.jpg">
-  <link rel="stylesheet" href="style.css">
- 
-</head>
+  <style>
+/* ========================== */
+/*       ОСНОВНЫЕ СТИЛИ       */
+/* ========================== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #6ba8d4; color: #1f3d7a; line-height: 1.6; }
+a { text-decoration: none; color: inherit; }
 
+/* ========================== */
+/*        HEADER / МЕНЮ       */
+/* ========================== */
+header { 
+  background: rgba(255, 255, 255, 0.95); 
+  backdrop-filter: blur(10px); 
+  position: sticky; top: 0; z-index: 100; 
+  display: flex; justify-content: space-between; align-items: center; 
+  padding: 0.5rem 1rem;
+}
+.logo img { height: 50px; }
+nav { position: relative; }
+.nav-links { display: flex; list-style: none; gap: 2rem; }
+.nav-links a { padding: 0.5rem 1rem; border-radius: 8px; font-weight: 500; color: #4a5568; transition: all 0.3s ease; }
+.nav-links a:hover { background: #4c79f0; color: white; transform: translateY(-2px); }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.hamburger div { width: 25px; height: 3px; background: #333; border-radius: 2px; }
+@media (max-width: 768px) {
+  .nav-links { position: absolute; top: 60px; right: 0; background: #f0f4ff; flex-direction: column; width: 200px; padding: 1rem; box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: none; }
+  .nav-links.active { display: flex; }
+  .hamburger { display: flex; }
+}
+
+/* ========================== */
+/*          HERO BANNER       */
+/* ========================== */
+.hero-banner { position: relative; width: 100%; height: 100vh; overflow: hidden; margin: 0; }
+.hero-banner img { width: 100%; height: 100%; object-fit: cover; display: block; z-index: 1; }
+.banner-cta { position: absolute; bottom: 5%; right: 5%; padding: 1.2rem 2rem; font-size: 1.2rem; font-weight: 700; background: #ffd166; color: #1f3d7a; box-shadow: 0 8px 20px rgba(0,0,0,.15); z-index: 2; transition: transform .2s ease, box-shadow .2s ease, background .2s ease; border-radius: 999px; }
+.banner-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,.2); background: #ffc642; }
+
+/* Мобильный баннер */
+@media (max-width: 480px) {
+  .hero-banner img { content: url('hero-banner-mobile.jpg'); object-fit: cover; }
+}
+
+/* Адаптивность баннера */
+@media (max-width: 1024px) { .hero-banner { height: 80vh; } }
+@media (max-width: 768px) { .hero-banner { height: 70vh; } .banner-cta { font-size: 1rem; padding: 0.9rem 1.6rem; } }
+@media (max-width: 480px) { .hero-banner { height: 60vh; } .banner-cta { font-size: 0.95rem; padding: 0.8rem 1.4rem; } }
+
+/* ========================== */
+/*       СТИЛИ СЕКЦИЙ        */
+/* ========================== */
+section { margin: 0; padding: 2rem; border-radius: 16px; background: #f0f4ff; box-shadow: 0 6px 25px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+section:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,0,0,0.1); }
+section h2 { text-align: center; font-size: clamp(1.8rem, 2.5vw, 2.5rem); margin-bottom: 2rem; }
+
+/* Видео */
+.video-section iframe { width: 100%; height: 450px; border-radius: 16px; display: block; margin: 0 auto; }
+@media (max-width: 768px) { .video-section iframe { height: 300px; } }
+@media (max-width: 480px) { .video-section iframe { height: 220px; } }
+
+/* Преимущества, инфо, уроки */
+.features, .info-grid, .lesson-grid { display: grid; gap: 2rem; }
+.features { grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); }
+.info-grid { grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); }
+.lesson-grid { grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); }
+
+/* Дисциплины и статистика */
+.subjects-grid, .stats-container { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.stats-container { margin-top: 2rem; }
+@media (max-width: 768px) { .stats-container { flex-direction: column; } }
+
+/* Кнопки и теги */
+.subject-tag, .donate-banner a, .youtube-channel a, .banner-cta { border-radius: 999px; transition: 0.3s; }
+
+/* ========================== */
+/*       Баннер пожертвований  */
+/* ========================== */
+.donate-banner { text-align: center; font-size: 1.2rem; font-weight: 500; background: #4c79f0; color: #fff; padding: 2rem; }
+.donate-banner a { display: inline-block; margin-top: 1rem; padding: 0.8rem 1.6rem; background: #ffd166; color: #1f3d7a; font-weight: 700; text-decoration: none; }
+.donate-banner a:hover { background: #ffc642; transform: translateY(-2px); }
+
+/* ========================== */
+/*       YouTube канал        */
+/* ========================== */
+.youtube-channel { text-align: center; margin-top: 2rem; }
+.youtube-channel h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.youtube-channel p { margin-bottom: 1rem; color: #4a5568; }
+.youtube-channel a { display: inline-block; padding: 0.7rem 1.4rem; background: #4c79f0; color: #fff; border-radius: 999px; font-weight: 600; transition: 0.3s; }
+.youtube-channel a:hover { background: #3b65d0; transform: translateY(-2px); }
+
+/* ========================== */
+/*          Футер             */
+/* ========================== */
+footer { text-align: center; padding: 2rem 1rem; background: #1f3d7a; color: #fff; }
+footer .contacts { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-top: 1rem; }
+footer a { color: #ffd166; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+  </style>
+</head>
 <body>
 
-  <!-- Меню подгружается через JS -->
+  <!-- Меню -->
   <header id="siteHeader"></header>
   <script src="menu.js"></script>
-<!-- HERO баннер -->
-<section class="hero-banner">
-  <img src="hero-banner.jpg" alt="Онлайн школа Беерот Ицхак">
-  <a class="banner-cta" href="enroll.html">Записаться</a>
-</section>
-  
-  <main class="container">
 
+  <!-- HERO баннер -->
+  <section class="hero-banner">
+    <img src="hero-banner.jpg" alt="Онлайн школа Беерот Ицхак">
+    <a class="banner-cta" href="enroll.html">Записаться</a>
+  </section>
 
+  <main>
     <!-- Видео-презентация -->
     <section id="video-section" class="video-section">
       <h2>Смотрите нашу презентацию</h2>
@@ -126,8 +222,7 @@
     <section class="lesson-examples">
       <h2>Примеры наших уроков</h2>
       <div class="lesson-grid">
-
-        <!-- Карточка урока 1 -->
+               <!-- Карточка урока 1 -->
         <div class="lesson-card">
           <div class="lesson-thumbnail">
             <iframe src="https://www.youtube.com/embed/AA_QSUAViZU" frameborder="0" allowfullscreen></iframe>
@@ -188,6 +283,7 @@
         </div>
 
       </div>
+      </div>
 
       <!-- YouTube канал -->
       <div class="youtube-channel">
@@ -198,7 +294,6 @@
         </a>
       </div>
     </section>
-
   </main>
 
   <!-- Футер -->
