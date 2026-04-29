@@ -159,6 +159,10 @@
       try {
         const response = await fetch("https://script.google.com/macros/s/AKfycbzZydFuxJtBDW8EiksryZ8lOhIKoqRvDg8iA0_EkVwiz0-rJjmSKYE5RMu7kd-1Yf_r1g/exec", {
           method: 'POST',
+          mode: 'no-cors',
+          headers: {
+      'Content-Type': 'application/json'
+    },
           body: JSON.stringify(json)
         });
         if(response.ok){
