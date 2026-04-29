@@ -156,22 +156,22 @@
 
       const json = Object.fromEntries(formData.entries());
 
-      try {
-        const response = await fetch("https://script.google.com/macros/s/AKfycbzZydFuxJtBDW8EiksryZ8lOhIKoqRvDg8iA0_EkVwiz0-rJjmSKYE5RMu7kd-1Yf_r1g/exec", {
+     try {
+        await fetch("https://script.google.com/macros/s/AKfycbzZydFuxJtBDW8EiksryZ8lOhIKoqRvDg8iA0_EkVwiz0-rJjmSKYE5RMu7kd-1Yf_r1g/exec", {
           method: 'POST',
-          mode: 'no-cors',
+          mode: 'no-cors', // Режим для обхода ограничений CORS
           headers: {
-      'Content-Type': 'application/json'
-    },
+            'Content-Type': 'text/plain' // Для no-cors лучше использовать этот тип или убрать headers
+          },
           body: JSON.stringify(json)
         });
-        if(response.ok){
-          document.getElementById('responseMessage').textContent = "Форма успешно отправлена!";
-          form.reset();
-        } else {
-          document.getElementById('responseMessage').textContent = "Ошибка при отправке.";
-        }
+
+        // В режиме no-cors мы не ждем ответа, а сразу считаем, что все ок
+        document.getElementById('responseMessage').textContent = "Форма успешно отправлена!";
+        form.reset();
+
       } catch (err) {
+        console.error("Ошибка:", err);
         document.getElementById('responseMessage').textContent = "Сбой сервера.";
       }
     });
