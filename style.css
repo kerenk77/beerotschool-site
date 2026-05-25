@@ -182,7 +182,6 @@ header{
 /* ========================== */
 /*         HERO BANNER        */
 /* ========================== */
-
 .hero-wrapper{
 
   margin:0;
@@ -190,8 +189,6 @@ header{
   padding:0;
 
   width:100%;
-
-  background:#ffffff;
 }
 
 .hero-banner{
@@ -199,10 +196,6 @@ header{
   display:block;
 
   width:100%;
-
-  max-width:1600px;
-
-  margin:0 auto;
 
   overflow:hidden;
 
@@ -229,8 +222,6 @@ header{
   height:auto;
 
   display:block;
-
-  object-fit:contain;
 
   border-radius:0;
 }
