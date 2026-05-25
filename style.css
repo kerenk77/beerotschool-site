@@ -223,7 +223,7 @@ header{
 
   display:block;
 
-  border-radius:0;
+  object-position:center;
 }
 
 /* ========================== */
