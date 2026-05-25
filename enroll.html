@@ -155,8 +155,7 @@
       formData.append('hebrew', hebrewLevels.join(', '));
 
       const json = Object.fromEntries(formData.entries());
-
-    try {
+try {
 
   await fetch(
 
@@ -165,10 +164,6 @@
     {
 
       method:'POST',
-
-      headers:{
-        'Content-Type':'application/json'
-      },
 
       body:JSON.stringify(json)
 
