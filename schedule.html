@@ -59,7 +59,7 @@
 
     /* === расписание === */
     #schedule {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 2rem auto;
       font-family: Arial, sans-serif;
     }
@@ -76,58 +76,76 @@
       font-weight: bold;
       font-size: 1.3rem;
       padding: 0.6rem;
-      margin: 1rem 0 0.5rem;
+      margin: 1.6rem 0 0.8rem;
       border-radius: 10px;
       color: #fff;
     }
     .class-title.male { background: #4c79f0; }
     .class-title.female { background: #ff7eb3; }
 
-    /* --- разметка "как в таблице" (планшет/десктоп) --- */
-    .schedule-row {
+    /* ============================================================
+       ГЛАВНОЕ ДЕЛЕНИЕ — ПО ДНЯМ.
+       На каждый класс — набор карточек, одна карточка = один день
+       недели. Внутри карточки — список "время: предмет (учитель)"
+       по порядку, как в таблице на Google Диске.
+       На широком экране карточки дней стоят в ряд, как неделя;
+       на телефоне (см. медиа-запрос ниже) — идут одна под другой.
+       ============================================================ */
+    .days-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-      gap: 4px;
-      margin: 2px 0;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin: 0 0 1.5rem;
     }
-    .cell {
-      background: #f0f4ff;
-      padding: clamp(4px, 1vw, 8px);
-      border-radius: 6px;
+    .day-card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      text-align: left;
+    }
+    .day-card-header {
+      background: #eef1fb;
+      color: #2d3748;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 10px 14px;
       text-align: center;
-      font-size: clamp(0.75rem, 1.6vw, 0.95rem);
-      overflow-wrap: break-word;
     }
-    .time-header .cell {
-      background: #cfd8e3;
-      font-weight: bold;
+    .day-card-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 4px 10px;
+      padding: 8px 14px;
+      border-bottom: 1px dashed #edf2f7;
+      font-size: 0.95rem;
     }
-    .cell.bold-number { font-weight: bold; }
-
-    /* строка предмета и строка учителя под ней в таблице на Google Диске
-       склеиваются в одну ячейку: предмет — обычным текстом, учитель —
-       отдельной строкой помельче и посветлее под ним */
+    .day-card-row:last-child { border-bottom: none; }
+    .day-card-time {
+      font-weight: 700;
+      color: #4c79f0;
+      flex-shrink: 0;
+      font-size: 0.85rem;
+    }
+    .day-card-subject { color: #2d3748; }
     .teacher-name {
       display: block;
-      font-size: 0.85em;
+      width: 100%;
+      font-size: 0.82em;
       font-style: italic;
       color: #718096;
-      margin-top: 2px;
+      margin-top: -2px;
+    }
+    .day-card-empty {
+      padding: 14px;
+      color: #a0aec0;
+      font-style: italic;
+      font-size: 0.9rem;
+      text-align: center;
     }
 
-    /* ============================================================
-       МОБИЛЬНЫЕ ЭКРАНЫ (узкие телефоны)
-       Вместо того чтобы сжимать таблицу в кучу нечитаемых колонок,
-       каждая строка расписания превращается в отдельную "карточку":
-       первая ячейка строки (время или день) становится заголовком
-       карточки, а остальные ячейки подписываются названием своей
-       колонки (берётся из строки "Время ..."), например:
-         09:00
-         Воскресенье: Математика
-         Понедельник: Тора
-       Так на телефоне видно не просто голые цифры, а понятно что
-       к чему относится, и не нужно листать таблицу вбок.
-       ============================================================ */
     @media (max-width: 640px) {
       .container {
         margin: 0;
@@ -136,57 +154,9 @@
         box-shadow: none;
       }
       #schedule { margin: 1rem auto; }
-
       .class-title { font-size: 1.1rem; }
-
-      /* строку с "Время ..." прячем — её данные уже видны как подписи внутри карточек */
-      .schedule-row.time-header { display: none; }
-
-      .schedule-row:not(.time-header) {
-        display: block;
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 12px;
-        padding: 10px 14px;
-        margin: 10px 0;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-        text-align: left;
-      }
-
-      .schedule-row:not(.time-header) .cell {
-        display: block;
-        background: none;
-        border-radius: 0;
-        padding: 6px 0;
-        text-align: left;
-        font-size: 0.95rem;
-        border-bottom: 1px dashed #edf2f7;
-      }
-      .schedule-row:not(.time-header) .cell:last-child {
-        border-bottom: none;
-      }
-
-      /* пустые ячейки (нет урока в этот день/время) на телефоне просто скрываем */
-      .schedule-row:not(.time-header) .cell.empty {
-        display: none;
-      }
-
-      /* первая ячейка строки — как заголовок карточки */
-      .schedule-row:not(.time-header) .cell:first-child {
-        font-weight: 700;
-        font-size: 1.05rem;
-        color: #2d3748;
-        border-bottom: 2px solid #cbd5e0;
-        padding-bottom: 8px;
-        margin-bottom: 4px;
-      }
-
-      /* подпись колонки (например название дня) перед значением, в одну строку с предметом */
-      .schedule-row:not(.time-header) .cell:not(:first-child)::before {
-        content: attr(data-label) ": ";
-        font-weight: 600;
-        color: #718096;
-      }
+      /* на телефоне — один день под другим, никакого горизонтального сжатия */
+      .days-grid { grid-template-columns: 1fr; gap: 12px; }
     }
   </style>
 </head>
@@ -218,83 +188,114 @@
         return;
       }
 
-      container.innerHTML = "";
-      const rows = text.trim().split("\n").map(r => r.split("\t"));
+      const rows = text.trim().split("\n").map(r => r.split("\t").map(c => c.trim()));
 
-      // подписи колонок для текущего блока расписания (обновляются на каждой строке "Время ...")
-      let headers = [];
-      // ячейки последней "обычной" строки расписания — нужны, чтобы подклеить
-      // к ним строку с именем учителя, которая в таблице идёт следующей строкой
-      // без времени в первой колонке
-      let lastRowCells = null;
+      // --- Проход 1: разбираем TSV в структуру { title, days, times } ---
+      // times[i] = { time, cells: [ {subject, teacher}, ... ] } — по одной ячейке на день,
+      // в том же порядке, что и колонки после "Время" в таблице на Google Диске.
+      const blocks = [];
+      let current = null;
+      let headers = [];      // текущая строка "Время ..." (задаёт дни-колонки)
+      let pendingRow = null; // последняя добавленная time-строка — для приклейки учителя
 
-      rows.forEach(row => {
-        const trimmed = row.map(c => c.trim());
+      rows.forEach(trimmed => {
         const nonEmpty = trimmed.filter(c => c !== "").length;
 
         // --- заголовок класса ---
         if (nonEmpty === 1 && trimmed[0] !== "") {
-          lastRowCells = null;
-          const title = document.createElement("div");
-          title.className = "class-title";
-          if (trimmed[0].toLowerCase().includes("девочки") || trimmed[0].toLowerCase().includes("мора")) {
-            title.classList.add("female");
-          } else {
-            title.classList.add("male");
-          }
-          title.textContent = trimmed[0];
-          container.appendChild(title);
+          current = { title: trimmed[0], days: [], times: [] };
+          blocks.push(current);
+          headers = [];
+          pendingRow = null;
         }
-        // --- строка "Время ..." (задаёт подписи для колонок ниже) ---
+        // --- строка "Время ..." — задаёт список дней-колонок для блока ниже ---
         else if (trimmed[0] && trimmed[0].toLowerCase().startsWith("время")) {
-          lastRowCells = null;
           headers = trimmed;
-          const line = document.createElement("div");
-          line.className = "schedule-row time-header";
-          trimmed.forEach(cell => {
-            const div = document.createElement("div");
-            div.className = "cell";
-            if (/\d/.test(cell)) div.classList.add("bold-number");
-            div.textContent = cell;
-            line.appendChild(div);
-          });
-          container.appendChild(line);
+          if (current) current.days = trimmed.slice(1);
+          pendingRow = null;
         }
-        // --- строка-продолжение (имя учителя): первая колонка пустая, а строка
-        //     с предметом для этого времени уже была нарисована непосредственно перед этим ---
-        else if (trimmed[0] === "" && nonEmpty > 0 && lastRowCells) {
+        // --- строка-продолжение (имя учителя): первая колонка пустая ---
+        else if (trimmed[0] === "" && nonEmpty > 0 && pendingRow) {
           trimmed.forEach((cell, i) => {
-            if (cell === "" || !lastRowCells[i]) return;
-            const targetCell = lastRowCells[i];
-            const teacher = document.createElement("span");
-            teacher.className = "teacher-name";
-            teacher.textContent = cell;
-            targetCell.appendChild(teacher);
-            targetCell.classList.remove("empty");
+            if (i === 0 || cell === "") return;
+            const dayIdx = i - 1;
+            if (pendingRow.cells[dayIdx]) pendingRow.cells[dayIdx].teacher = cell;
           });
         }
-        // --- обычная строка расписания ---
-        else if (nonEmpty > 0) {
-          const line = document.createElement("div");
-          line.className = "schedule-row";
-          const rowCells = [];
-          trimmed.forEach((cell, i) => {
-            const div = document.createElement("div");
-            div.className = "cell";
-            if (cell === "") div.classList.add("empty");
-            if (/\d/.test(cell)) div.classList.add("bold-number");
-            // подпись колонки (для мобильной карточки), берём из последней строки "Время ..."
-            if (headers[i]) div.dataset.label = headers[i];
-            const subject = document.createElement("span");
-            subject.className = "subject-text";
-            subject.textContent = cell;
-            div.appendChild(subject);
-            line.appendChild(div);
-            rowCells.push(div);
-          });
-          container.appendChild(line);
-          lastRowCells = rowCells;
+        // --- обычная строка расписания (время + предмет на каждый день) ---
+        else if (nonEmpty > 0 && current) {
+          const dayCount = Math.max(headers.length, trimmed.length) - 1;
+          const cells = [];
+          for (let i = 0; i < dayCount; i++) {
+            cells.push({ subject: trimmed[i + 1] || "", teacher: "" });
+          }
+          const timeEntry = { time: trimmed[0], cells: cells };
+          current.times.push(timeEntry);
+          pendingRow = timeEntry;
         }
+      });
+
+      // --- Проход 2: рисуем по дням ---
+      container.innerHTML = "";
+      blocks.forEach(block => {
+        const title = document.createElement("div");
+        title.className = "class-title";
+        const lower = block.title.toLowerCase();
+        title.classList.add(lower.includes("девочки") || lower.includes("мора") ? "female" : "male");
+        title.textContent = block.title;
+        container.appendChild(title);
+
+        const grid = document.createElement("div");
+        grid.className = "days-grid";
+
+        block.days.forEach((day, dayIdx) => {
+          const dayCard = document.createElement("div");
+          dayCard.className = "day-card";
+
+          const header = document.createElement("div");
+          header.className = "day-card-header";
+          header.textContent = day;
+          dayCard.appendChild(header);
+
+          const entries = block.times
+            .map(t => ({ time: t.time, subject: t.cells[dayIdx] ? t.cells[dayIdx].subject : "", teacher: t.cells[dayIdx] ? t.cells[dayIdx].teacher : "" }))
+            .filter(e => e.subject !== "");
+
+          if (entries.length === 0) {
+            const empty = document.createElement("div");
+            empty.className = "day-card-empty";
+            empty.textContent = "Занятий нет";
+            dayCard.appendChild(empty);
+          } else {
+            entries.forEach(e => {
+              const row = document.createElement("div");
+              row.className = "day-card-row";
+
+              const timeSpan = document.createElement("span");
+              timeSpan.className = "day-card-time";
+              timeSpan.textContent = e.time;
+              row.appendChild(timeSpan);
+
+              const subjSpan = document.createElement("span");
+              subjSpan.className = "day-card-subject";
+              subjSpan.textContent = e.subject;
+              row.appendChild(subjSpan);
+
+              if (e.teacher) {
+                const teacherSpan = document.createElement("span");
+                teacherSpan.className = "teacher-name";
+                teacherSpan.textContent = e.teacher;
+                row.appendChild(teacherSpan);
+              }
+
+              dayCard.appendChild(row);
+            });
+          }
+
+          grid.appendChild(dayCard);
+        });
+
+        container.appendChild(grid);
       });
     }
     loadSchedule();
