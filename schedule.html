@@ -14,7 +14,6 @@
       margin: 0;
       padding: 0;
     }
-
     .container {
       max-width: 1200px;
       margin: 2rem auto;
@@ -24,27 +23,24 @@
       box-shadow: 0 8px 32px rgba(0,0,0,0.1);
       text-align: center;
     }
-
     h1 {
       text-align: center;
       color: #4a5568;
       margin-bottom: 2rem;
+      font-size: clamp(1.3rem, 5vw, 2rem);
     }
-
     .hamburger {
       display: none;
       flex-direction: column;
       cursor: pointer;
       gap: 5px;
     }
-
     .hamburger div {
       width: 25px;
       height: 3px;
       background: #333;
       border-radius: 2px;
     }
-
     @media (max-width: 768px) {
       .nav-links {
         position: absolute;
@@ -67,6 +63,13 @@
       margin: 2rem auto;
       font-family: Arial, sans-serif;
     }
+    .schedule-status {
+      text-align: center;
+      color: #718096;
+      padding: 1rem;
+      font-size: 1rem;
+    }
+    .schedule-status.error { color: #e53e3e; }
 
     .class-title {
       text-align: center;
@@ -77,76 +80,106 @@
       border-radius: 10px;
       color: #fff;
     }
-
     .class-title.male { background: #4c79f0; }
     .class-title.female { background: #ff7eb3; }
 
-   /* .schedule-row {
+    /* --- разметка "как в таблице" (планшет/десктоп) --- */
+    .schedule-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
       gap: 4px;
       margin: 2px 0;
     }
-
     .cell {
       background: #f0f4ff;
-      padding: 6px;
+      padding: clamp(4px, 1vw, 8px);
       border-radius: 6px;
       text-align: center;
-      font-size: 0.95rem;
+      font-size: clamp(0.75rem, 1.6vw, 0.95rem);
+      overflow-wrap: break-word;
     }
-
     .time-header .cell {
       background: #cfd8e3;
       font-weight: bold;
-    }*/
-    /* === расписание === */
-.schedule-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* уменьшили минимальную ширину */
-  gap: 4px;
-  margin: 2px 0;
-}
-
-.cell {
-  background: #f0f4ff;
-  padding: clamp(4px, 1vw, 8px); /* адаптивный padding */
-  border-radius: 6px;
-  text-align: center;
-  font-size: clamp(0.7rem, 2vw, 0.95rem); /* адаптивный размер текста */
-}
-
-.time-header .cell {
-  background: #cfd8e3;
-  font-weight: bold;
-}
-
-/* адаптив для мобильных экранов */
-@media (max-width: 600px) {
-  .schedule-row {
-    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); /* еще меньше для узких экранов */
-  }
-  .cell {
-    padding: clamp(3px, 2vw, 6px);
-    font-size: clamp(0.65rem, 3vw, 0.85rem);
-  }
-}
-
-
+    }
     .cell.bold-number { font-weight: bold; }
 
-    /* адаптив для мобильных */
-    @media (max-width: 600px) {
-      .schedule-row {
-        grid-template-columns: 1fr; /* каждая ячейка на всю ширину */
-        gap: 4px;
+    /* ============================================================
+       МОБИЛЬНЫЕ ЭКРАНЫ (узкие телефоны)
+       Вместо того чтобы сжимать таблицу в кучу нечитаемых колонок,
+       каждая строка расписания превращается в отдельную "карточку":
+       первая ячейка строки (время или день) становится заголовком
+       карточки, а остальные ячейки подписываются названием своей
+       колонки (берётся из строки "Время ..."), например:
+         09:00
+         Воскресенье: Математика
+         Понедельник: Тора
+       Так на телефоне видно не просто голые цифры, а понятно что
+       к чему относится, и не нужно листать таблицу вбок.
+       ============================================================ */
+    @media (max-width: 640px) {
+      .container {
+        margin: 0;
+        padding: 1.2rem 0.8rem;
+        border-radius: 0;
+        box-shadow: none;
       }
-      .cell {
-        text-align: left; /* текст слева для удобства */
-        padding-left: 12px;
+      #schedule { margin: 1rem auto; }
+
+      .class-title { font-size: 1.1rem; }
+
+      /* строку с "Время ..." прячем — её данные уже видны как подписи внутри карточек */
+      .schedule-row.time-header { display: none; }
+
+      .schedule-row:not(.time-header) {
+        display: block;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 10px 14px;
+        margin: 10px 0;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        text-align: left;
       }
-      .time-header .cell {
-        text-align: center; /* сохраняем центрирование для времени */
+
+      .schedule-row:not(.time-header) .cell {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 10px;
+        background: none;
+        border-radius: 0;
+        padding: 5px 0;
+        text-align: left;
+        font-size: 0.95rem;
+        border-bottom: 1px dashed #edf2f7;
+      }
+      .schedule-row:not(.time-header) .cell:last-child {
+        border-bottom: none;
+      }
+
+      /* пустые ячейки (нет урока в этот день/время) на телефоне просто скрываем */
+      .schedule-row:not(.time-header) .cell.empty {
+        display: none;
+      }
+
+      /* первая ячейка строки — как заголовок карточки */
+      .schedule-row:not(.time-header) .cell:first-child {
+        justify-content: flex-start;
+        font-weight: 700;
+        font-size: 1.05rem;
+        color: #2d3748;
+        border-bottom: 2px solid #cbd5e0;
+        padding-bottom: 8px;
+        margin-bottom: 4px;
+      }
+
+      /* подпись колонки (например название дня) перед значением */
+      .schedule-row:not(.time-header) .cell:not(:first-child)::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #718096;
+        flex-shrink: 0;
       }
     }
   </style>
@@ -159,17 +192,31 @@
   <!-- Контент -->
   <div class="container">
     <h1>Расписание занятий</h1>
-    <div id="schedule"></div>
+    <div id="schedule">
+      <p class="schedule-status">Загрузка расписания...</p>
+    </div>
   </div>
 
   <script>
     async function loadSchedule() {
       const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRXRBl4YNIksCcl6axtnLh6Dy5mFcvhraY4D17cr3UtpEMX8K7ypVvLc7WHLdM0ypBbAh3LZcCq97Lv/pub?gid=507837118&single=true&output=tsv";
-      const response = await fetch(url);
-      const text = await response.text();
-
-      const rows = text.trim().split("\n").map(r => r.split("\t"));
       const container = document.getElementById("schedule");
+
+      let text;
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("HTTP " + response.status);
+        text = await response.text();
+      } catch (err) {
+        container.innerHTML = '<p class="schedule-status error">Не удалось загрузить расписание. Проверьте интернет-соединение и обновите страницу.</p>';
+        return;
+      }
+
+      container.innerHTML = "";
+      const rows = text.trim().split("\n").map(r => r.split("\t"));
+
+      // подписи колонок для текущего блока расписания (обновляются на каждой строке "Время ...")
+      let headers = [];
 
       rows.forEach(row => {
         const trimmed = row.map(c => c.trim());
@@ -186,9 +233,10 @@
           }
           title.textContent = trimmed[0];
           container.appendChild(title);
-        } 
-        // --- строка "Время ..." ---
+        }
+        // --- строка "Время ..." (задаёт подписи для колонок ниже) ---
         else if (trimmed[0] && trimmed[0].toLowerCase().startsWith("время")) {
+          headers = trimmed;
           const line = document.createElement("div");
           line.className = "schedule-row time-header";
           trimmed.forEach(cell => {
@@ -204,10 +252,13 @@
         else if (nonEmpty > 0) {
           const line = document.createElement("div");
           line.className = "schedule-row";
-          trimmed.forEach(cell => {
+          trimmed.forEach((cell, i) => {
             const div = document.createElement("div");
             div.className = "cell";
-            if (/\d/.test(cell)) div.classList.add("bold-number"); // жирные все числа
+            if (cell === "") div.classList.add("empty");
+            if (/\d/.test(cell)) div.classList.add("bold-number");
+            // подпись колонки (для мобильной карточки), берём из последней строки "Время ..."
+            if (headers[i]) div.dataset.label = headers[i];
             div.textContent = cell;
             line.appendChild(div);
           });
@@ -215,7 +266,6 @@
         }
       });
     }
-
     loadSchedule();
   </script>
 </body>
