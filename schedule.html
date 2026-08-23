@@ -83,14 +83,46 @@
     .class-title.male { background: #4c79f0; }
     .class-title.female { background: #ff7eb3; }
 
+    .teacher-name {
+      display: block;
+      font-size: 0.82em;
+      font-style: italic;
+      color: #718096;
+      margin-top: 2px;
+    }
+
     /* ============================================================
-       ГЛАВНОЕ ДЕЛЕНИЕ — ПО ДНЯМ.
-       На каждый класс — набор карточек, одна карточка = один день
-       недели. Внутри карточки — список "время: предмет (учитель)"
-       по порядку, как в таблице на Google Диске.
-       На широком экране карточки дней стоят в ряд, как неделя;
-       на телефоне (см. медиа-запрос ниже) — идут одна под другой.
+       ДВЕ ВЕРСТКИ ИЗ ОДНИХ ДАННЫХ:
+       #schedule-desktop — исходная таблица-сетка (время в строках,
+         дни в колонках), для компьютеров и больших планшетов;
+       #schedule-mobile  — карточки по дням, для узких телефонов.
+       Только одна из них показана одновременно — переключение
+       чисто через media query ниже, без пересчёта в JS.
        ============================================================ */
+    #schedule-mobile { display: none; }
+
+    /* --- desktop/планшет: таблица-сетка --- */
+    .schedule-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+      gap: 4px;
+      margin: 2px 0;
+    }
+    .cell {
+      background: #f0f4ff;
+      padding: clamp(4px, 1vw, 8px);
+      border-radius: 6px;
+      text-align: center;
+      font-size: clamp(0.75rem, 1.6vw, 0.95rem);
+      overflow-wrap: break-word;
+    }
+    .time-header .cell {
+      background: #cfd8e3;
+      font-weight: bold;
+    }
+    .cell.bold-number { font-weight: bold; }
+
+    /* --- телефон: карточки по дням --- */
     .days-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -130,12 +162,8 @@
       font-size: 0.85rem;
     }
     .day-card-subject { color: #2d3748; }
-    .teacher-name {
-      display: block;
+    .day-card-row .teacher-name {
       width: 100%;
-      font-size: 0.82em;
-      font-style: italic;
-      color: #718096;
       margin-top: -2px;
     }
     .day-card-empty {
@@ -155,8 +183,15 @@
       }
       #schedule { margin: 1rem auto; }
       .class-title { font-size: 1.1rem; }
-      /* на телефоне — один день под другим, никакого горизонтального сжатия */
+
+      /* переключаем версию расписания на телефоне */
+      #schedule-desktop { display: none; }
+      #schedule-mobile { display: block; }
+
+      /* один день под другим, никакого горизонтального сжатия */
       .days-grid { grid-template-columns: 1fr; gap: 12px; }
+      /* дни, где занятий нет, на телефоне не показываем */
+      .day-card.is-empty { display: none; }
     }
   </style>
 </head>
@@ -170,13 +205,17 @@
     <h1>Расписание занятий</h1>
     <div id="schedule">
       <p class="schedule-status">Загрузка расписания...</p>
+      <div id="schedule-desktop"></div>
+      <div id="schedule-mobile"></div>
     </div>
   </div>
 
   <script>
     async function loadSchedule() {
       const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRXRBl4YNIksCcl6axtnLh6Dy5mFcvhraY4D17cr3UtpEMX8K7ypVvLc7WHLdM0ypBbAh3LZcCq97Lv/pub?gid=507837118&single=true&output=tsv";
-      const container = document.getElementById("schedule");
+      const status = document.querySelector(".schedule-status");
+      const desktopContainer = document.getElementById("schedule-desktop");
+      const mobileContainer = document.getElementById("schedule-mobile");
 
       let text;
       try {
@@ -184,7 +223,8 @@
         if (!response.ok) throw new Error("HTTP " + response.status);
         text = await response.text();
       } catch (err) {
-        container.innerHTML = '<p class="schedule-status error">Не удалось загрузить расписание. Проверьте интернет-соединение и обновите страницу.</p>';
+        status.textContent = "Не удалось загрузить расписание. Проверьте интернет-соединение и обновите страницу.";
+        status.classList.add("error");
         return;
       }
 
@@ -235,15 +275,67 @@
         }
       });
 
-      // --- Проход 2: рисуем по дням ---
-      container.innerHTML = "";
-      blocks.forEach(block => {
+      status.remove();
+
+      function makeTitle(text) {
         const title = document.createElement("div");
         title.className = "class-title";
-        const lower = block.title.toLowerCase();
+        const lower = text.toLowerCase();
         title.classList.add(lower.includes("девочки") || lower.includes("мора") ? "female" : "male");
-        title.textContent = block.title;
-        container.appendChild(title);
+        title.textContent = text;
+        return title;
+      }
+
+      // --- Проход 2а: таблица-сетка (десктоп, большие планшеты) ---
+      blocks.forEach(block => {
+        desktopContainer.appendChild(makeTitle(block.title));
+
+        const headerRow = document.createElement("div");
+        headerRow.className = "schedule-row time-header";
+        const timeLabel = document.createElement("div");
+        timeLabel.className = "cell";
+        timeLabel.textContent = "Время";
+        headerRow.appendChild(timeLabel);
+        block.days.forEach(day => {
+          const c = document.createElement("div");
+          c.className = "cell";
+          c.textContent = day;
+          headerRow.appendChild(c);
+        });
+        desktopContainer.appendChild(headerRow);
+
+        block.times.forEach(t => {
+          const row = document.createElement("div");
+          row.className = "schedule-row";
+
+          const timeCell = document.createElement("div");
+          timeCell.className = "cell bold-number";
+          timeCell.textContent = t.time;
+          row.appendChild(timeCell);
+
+          t.cells.forEach(c => {
+            const div = document.createElement("div");
+            div.className = "cell";
+            if (/\d/.test(c.subject)) div.classList.add("bold-number");
+            const subj = document.createElement("span");
+            subj.textContent = c.subject;
+            div.appendChild(subj);
+            if (c.teacher) {
+              const teacherSpan = document.createElement("span");
+              teacherSpan.className = "teacher-name";
+              teacherSpan.textContent = c.teacher;
+              div.appendChild(teacherSpan);
+            }
+            row.appendChild(div);
+          });
+
+          desktopContainer.appendChild(row);
+        });
+      });
+
+      // --- Проход 2б: карточки по дням (телефон) ---
+      blocks.forEach(block => {
+        mobileContainer.appendChild(makeTitle(block.title));
 
         const grid = document.createElement("div");
         grid.className = "days-grid";
@@ -262,6 +354,7 @@
             .filter(e => e.subject !== "");
 
           if (entries.length === 0) {
+            dayCard.classList.add("is-empty");
             const empty = document.createElement("div");
             empty.className = "day-card-empty";
             empty.textContent = "Занятий нет";
@@ -295,7 +388,7 @@
           grid.appendChild(dayCard);
         });
 
-        container.appendChild(grid);
+        mobileContainer.appendChild(grid);
       });
     }
     loadSchedule();
