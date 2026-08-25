@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </li>
 
           <li>
-            <a href="http://detskiy-mir.beerot.ru/">
+            <a href="https://kids.beerot.online/">
               Записи уроков
             </a>
           </li>
