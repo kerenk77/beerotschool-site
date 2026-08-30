@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </li>
 
           <li>
-            <a href="https://www.beerot.ru/%d1%86%d0%b4%d0%b0%d0%ba%d0%b0-%d0%bf%d0%be%d0%b6%d0%b5%d1%80%d1%82%d0%b2%d0%be%d0%b2%d0%b0%d1%82%d1%8c-%d0%b1%d0%b5%d0%b5%d1%80%d0%be%d1%82-%d0%b8%d1%86%d1%85%d0%b0%d0%ba">
+            <a href="https://beerot.online/%d1%86%d0%b4%d0%b0%d0%ba%d0%b0-%d0%bf%d0%be%d0%b6%d0%b5%d1%80%d1%82%d0%b2%d0%be%d0%b2%d0%b0%d1%82%d1%8c-%d0%b1%d0%b5%d0%b5%d1%80%d0%be%d1%82-%d0%b8%d1%86%d1%85%d0%b0%d0%ba/">
               Оплата
             </a>
           </li>
